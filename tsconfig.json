@@ -19,7 +19,8 @@
       "@/components/*": ["./components/*"],
       "@/styles/*": ["./styles/*"],
       "@/hooks/*": ["./hooks/*"],
-      "@/models/": ["./models/"]
+      "@/models/": ["./models/"],
+      "@/api/": ["./api-client/"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
