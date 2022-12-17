@@ -1,3 +1,4 @@
+import { MainLayout } from '@/components/layout';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -43,6 +44,8 @@ export default function AboutPage(props: AboutPageProps) {
     </div>
   );
 }
+
+AboutPage.Layout = MainLayout;
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   return {
