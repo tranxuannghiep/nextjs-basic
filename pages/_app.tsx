@@ -1,17 +1,30 @@
-import '../styles/globals.css';
-
 import { EmptyLayout } from '@/components/layout';
+import { CacheProvider } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import axiosClient from 'api-client/axiosClient';
 import { AppPropsWithLayout } from 'models';
 import { SWRConfig } from 'swr';
-import axiosClient from 'api-client/axiosClient';
+import { createEmotionCache, theme } from 'utils';
+import '../styles/globals.css';
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+const clientSideEmotionCache = createEmotionCache();
+export default function App({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps,
+}: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
   return (
-    <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </SWRConfig>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SWRConfig>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }

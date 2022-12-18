@@ -1,4 +1,6 @@
 import { AdminLayout } from '@/components/layout';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -33,15 +35,17 @@ export default function AboutPage(props: AboutPageProps) {
     );
   };
   return (
-    <div>
-      <h1>About Page</h1>
+    <Box>
+      <Typography component="h1" variant="h4" color="primary.main">
+        About Page
+      </Typography>
       <ul>
         {postList.map((post) => (
           <li key={post.id}>{post.title}</li>
         ))}
       </ul>
       <button onClick={handleClickNext}>Next Page</button>
-    </div>
+    </Box>
   );
 }
 
