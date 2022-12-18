@@ -1,8 +1,8 @@
 import { authApi } from 'api-client';
 import useSWR from 'swr';
-import type { PublicConfiguration } from 'swr/_internal';
+import type { PublicConfiguration, BareFetcher } from 'swr/_internal';
 
-export const useAuth = (options?: Partial<PublicConfiguration>) => {
+export const useAuth = (options?: Partial<PublicConfiguration<any, any, BareFetcher<any>>>) => {
   //profile
   const {
     data: profile,
@@ -14,6 +14,8 @@ export const useAuth = (options?: Partial<PublicConfiguration>) => {
     revalidateOnFocus: false,
     ...options,
   });
+
+  const isFirstLoading = profile === undefined && error === undefined;
 
   async function login() {
     await authApi.login({
@@ -32,6 +34,7 @@ export const useAuth = (options?: Partial<PublicConfiguration>) => {
     profile,
     error,
     isLoading,
+    isFirstLoading,
     login,
     logout,
   };
