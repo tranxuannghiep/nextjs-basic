@@ -23,7 +23,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: roboto.style.fontFamily,
+    fontFamily: 'Heebo, sans-serif',
   },
   components: {
     MuiContainer: {

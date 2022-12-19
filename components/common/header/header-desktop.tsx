@@ -13,7 +13,7 @@ export function HeaderDesktop() {
         {ROUTE_LIST.map((route) => (
           <Link key={route.path} href={route.path} passHref>
             <MuiLink
-              sx={{ ml: 2 }}
+              sx={{ ml: 2, fontWeight: 'medium' }}
               component="span"
               className={clsx({ active: router.pathname === route.path })}
             >

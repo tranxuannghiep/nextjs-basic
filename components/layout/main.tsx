@@ -1,7 +1,6 @@
-import { Container, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { Box } from '@mui/system';
 import { LayoutProps } from 'models';
-import Link from 'next/link';
 import { useEffect } from 'react';
 import { Footer, Header } from '../common';
 
@@ -14,10 +13,6 @@ export function MainLayout({ children }: LayoutProps) {
     <Stack minHeight="100vh">
       <Header />
       <Box component="main" flexGrow={1}>
-        <Container sx={{ backgroundColor: 'primary.main' }}>SM container</Container>
-        <Link href="/">Home</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/works">Works</Link>
         <div>{children}</div>
       </Box>
       <Footer />
