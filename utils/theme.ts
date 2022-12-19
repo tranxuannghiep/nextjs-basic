@@ -53,7 +53,7 @@ export const theme = createTheme({
         root: {
           color: 'black',
           transition: 'all .3s',
-          '&:hover': {
+          '&:hover,&.active': {
             color: '#FF6464',
           },
         },
