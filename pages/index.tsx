@@ -1,19 +1,14 @@
+import { HeroSection } from '@/components/home';
 import { MainLayout } from '@/components/layout';
+import { Box } from '@mui/material';
 import { NextPageWithLayout } from 'models';
-import { useRouter } from 'next/router';
 
 const Home: NextPageWithLayout = () => {
-  const router = useRouter();
-  const handleNavigateDetailPage = () => {
-    router.push({
-      pathname: '/post/[postId]',
-      query: {
-        postId: 123,
-        ref: 'social',
-      },
-    });
-  };
-  return <div>Home Page</div>;
+  return (
+    <Box>
+      <HeroSection />
+    </Box>
+  );
 };
 Home.Layout = MainLayout;
 export default Home;
