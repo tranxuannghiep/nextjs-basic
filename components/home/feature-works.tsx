@@ -45,7 +45,9 @@ export function FeatureWorks() {
   return (
     <Box component="section" pt={2} pb={4}>
       <Container>
-        <Typography variant="h5">Feature works</Typography>
+        <Typography variant="h5" mb={4}>
+          Feature works
+        </Typography>
         <WorkList workList={workList} />
       </Container>
     </Box>

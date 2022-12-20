@@ -73,6 +73,24 @@ export let theme = createTheme({
         },
       ],
     },
+    MuiChip: {
+      variants: [
+        {
+          props: { color: 'secondary' },
+          style: {
+            backgroundColor: '#142850',
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '16px',
+          },
+        },
+      ],
+      styleOverrides: {
+        root: {
+          paddingInline: 2,
+        },
+      },
+    },
   },
 });
 theme = responsiveFontSizes(theme);

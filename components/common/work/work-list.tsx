@@ -1,5 +1,6 @@
 import { Box, Divider } from '@mui/material';
 import { Work } from 'models';
+import { WorkCard } from './work-card';
 
 export interface WorkListProps {
   workList: Work[];
@@ -10,10 +11,10 @@ export function WorkList({ workList }: WorkListProps) {
   return (
     <Box>
       {workList.map((work) => (
-        <div key={work.id}>
-          <Box>{work.title}</Box>
+        <Box key={work.id}>
+          <WorkCard work={work} />
           <Divider sx={{ my: 3 }} />
-        </div>
+        </Box>
       ))}
     </Box>
   );
