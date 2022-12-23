@@ -1,8 +1,13 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-export interface HeaderMobileProps {}
-
-export function HeaderMobile(props: HeaderMobileProps) {
-  return <Box display={{ xs: 'block', sm: 'none' }}>Header Mobile</Box>;
+export function HeaderMobile() {
+  return (
+    <Stack direction="row" display={{ xs: 'flex', sm: 'none' }} justifyContent="flex-end" py={2}>
+      <IconButton>
+        <MenuIcon />
+      </IconButton>
+    </Stack>
+  );
 }
