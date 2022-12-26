@@ -15,6 +15,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkPrism from 'remark-prism';
 import Script from 'next/script';
 import * as React from 'react';
+import { Seo } from '@/components/common/seo';
 
 export interface BlogDetailPageProps {
   post: Post;
@@ -23,6 +24,16 @@ export interface BlogDetailPageProps {
 export default function BlogDetailPage({ post }: BlogDetailPageProps) {
   return (
     <Box mt={{ xs: 3, sm: 11 }}>
+      <Seo
+        data={{
+          title: post.title,
+          description: post.description,
+          url: `${process.env.HOST_URL}/blog/${post.slug}`,
+          thumbnailUrl:
+            post.thumbnailUrl ||
+            'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
+        }}
+      />
       <Typography component="h1" variant="h3" fontWeight="bold" mb={{ xs: 2, sm: 7 }}>
         Blog Detail
       </Typography>

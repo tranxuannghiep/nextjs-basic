@@ -29,6 +29,7 @@ export async function getPostList(): Promise<Post[]> {
       description: excerpt || '',
       mdContent: content,
       publishedDate: 1581440400000,
+      thumbnailUrl: data.image || null,
     });
   }
   return postList;

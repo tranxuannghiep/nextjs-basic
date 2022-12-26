@@ -11,7 +11,7 @@ const Home: NextPageWithLayout = () => {
         data={{
           title: 'NextJS Basic',
           description: 'Home page NextJs basic',
-          url: 'https://nextjs-basic-gilt.vercel.app/',
+          url: process.env.HOST_URL || 'https://nextjs-basic-gilt.vercel.app/',
           thumbnailUrl:
             'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
         }}
