@@ -9,6 +9,9 @@ import remarkRehype from 'remark-rehype';
 import rehypeDocument from 'rehype-document';
 import rehypeFormat from 'rehype-format';
 import rehypeStringify from 'rehype-stringify';
+import remarkToc from 'remark-toc';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import * as React from 'react';
 
 export interface BlogDetailPageProps {
@@ -49,7 +52,10 @@ export const getStaticProps: GetStaticProps<BlogDetailPageProps> = async (
   if (!post) return { notFound: true };
   const file = await unified()
     .use(remarkParse)
+    .use(remarkToc)
     .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
     .use(rehypeDocument, { title: 'Blog detail' })
     .use(rehypeFormat)
     .use(rehypeStringify)
