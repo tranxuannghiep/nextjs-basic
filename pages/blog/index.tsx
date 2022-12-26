@@ -1,27 +1,32 @@
+import { PostItem } from '@/components/common/blog';
 import { MainLayout } from '@/components/layout';
+import { Post } from '@/models';
 import { getPostList } from '@/utils/posts';
-import { Stack } from '@mui/material';
+import { Box, Container, Divider, Typography } from '@mui/material';
 import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import * as React from 'react';
+import Link from 'next/link';
 
 export interface BlogListPageProps {
-  posts: any[];
+  posts: Post[];
 }
 
 export default function BlogListPage({ posts }: BlogListPageProps) {
-  const router = useRouter();
   return (
-    <Stack flexGrow={1}>
-      <h1>Post List Page</h1>
-      <ul>
+    <Box mt={11}>
+      <Container>
+        <Typography component="h1" variant="h3" fontWeight="bold" mb={7}>
+          Blog
+        </Typography>
         {posts.map((post) => (
-          <li key={post.id} onClick={() => router.push(`post/${post.id}`)}>
-            {post.title}
-          </li>
+          <Link key={post.id} href={`blog/${post.id}`} passHref>
+            <Box>
+              <PostItem post={post} />
+              <Divider sx={{ my: 4 }} />
+            </Box>
+          </Link>
         ))}
-      </ul>
-    </Stack>
+      </Container>
+    </Box>
   );
 }
 
