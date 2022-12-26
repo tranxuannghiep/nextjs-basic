@@ -28,7 +28,7 @@ export async function getPostList(): Promise<Post[]> {
       },
       description: excerpt || '',
       mdContent: content,
-      publishedDate: 1581440400000,
+      publishedDate: "2020-02-02",
       thumbnailUrl: data.image || null,
     });
   }

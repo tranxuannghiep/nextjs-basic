@@ -1,5 +1,5 @@
 import { Box, Divider, Stack, Typography } from '@mui/material';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { Post } from 'models';
 
 export interface PostItemProps {
@@ -13,7 +13,7 @@ export function PostItem({ post }: PostItemProps) {
         {post.title}
       </Typography>
       <Stack direction={{ xs: 'row', sm: 'column', md: 'row' }} my={2}>
-        <Typography variant="body1">{format(post.publishedDate, 'dd MMM yyyy')}</Typography>
+        <Typography variant="body1">{format(parseISO(post.publishedDate), 'dd MMM yyyy')}</Typography>
         <Divider
           orientation="vertical"
           flexItem

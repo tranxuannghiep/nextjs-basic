@@ -8,7 +8,7 @@ export interface Author {
 export interface Post {
   id: string | number;
   title: string;
-  publishedDate: number;
+  publishedDate: string;
   tagList: string[];
   description: string;
   slug: string;

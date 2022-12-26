@@ -8,7 +8,7 @@ export function RecentPosts() {
     {
       id: 1,
       title: 'Making a design system from scratch',
-      publishedDate: 1581440400000,
+      publishedDate: '2020-02-02',
       tagList: ['Design', 'Pattern'],
       slug: '',
       author: {
@@ -23,7 +23,7 @@ export function RecentPosts() {
     {
       id: 2,
       title: 'Creating pixel perfect icons in Figma',
-      publishedDate: 1581440400000,
+      publishedDate: '2020-02-02',
       tagList: ['Figma', 'Icon Design'],
       slug: '',
       author: {
