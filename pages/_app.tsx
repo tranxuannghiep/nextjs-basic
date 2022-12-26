@@ -7,6 +7,7 @@ import { AppPropsWithLayout } from 'models';
 import { SWRConfig } from 'swr';
 import { createEmotionCache, theme } from 'utils';
 import '../styles/globals.css';
+import '../styles/prism.css';
 
 const clientSideEmotionCache = createEmotionCache();
 export default function App({

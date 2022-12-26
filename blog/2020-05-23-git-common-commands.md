@@ -21,7 +21,7 @@ Khi nhắc tới git có khá là nhiều lệnh khác nhau, tuy nhiên trong th
 
 ## 1. Lấy code mới nhất trên branch develop
 
-```sh
+```sh[class="line-numbers"]
 git checkout develop # switch sang nhánh develop
 
 git pull # lấy code mới nhất về
@@ -47,7 +47,7 @@ CODING CHANGES 😎
 > <br />Nhưng có thể trong lúc mình làm, ai đó đã update thêm lên nhánh develop rồi.
 > <br />Nên mình phải lấy code mới nhất trên nhánh develop rồi mới apply cái changes của mình.
 
-```sh
+```sh[class="line-numbers"]
 git add . # chấp nhận tất cả changes
 
 git stash # save tất cả code changes vào stash (kiểu nơi giữ code tạm)
@@ -57,13 +57,13 @@ git pull  # lấy code mới nhất về
 
 ## 4. Tạo nhánh cho code changes của mình
 
-```sh
+```sh[class="line-numbers"]
 git checkout -b feature/123-add-address-ui
 ```
 
 ## 5. Lấy code từ trong stash ra (hùi nảy lưu bằng git stash)
 
-```sh
+```sh[class="line-numbers"]
 git stash pop
 ```
 
@@ -71,7 +71,7 @@ git stash pop
 
 ## 6. Tạo commit, viết commit message
 
-```sh
+```sh[class="line-numbers"]
 git status # xem các files thay đổi
 git add . # chấp nhận tất cả thay đổi
 
@@ -89,7 +89,7 @@ git commit -m "[123] Add address ui
 
 ## 7. Push code lên remote repository (Github, Gitlab, Bitbucket, ...)
 
-```sh
+```sh[class="line-numbers"]
 git push -u origin feature/123-address-ui
 ```
 

@@ -2,10 +2,9 @@ import { PostItem } from '@/components/common/blog';
 import { MainLayout } from '@/components/layout';
 import { Post } from '@/models';
 import { getPostList } from '@/utils/posts';
-import { Box, Container, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-
 export interface BlogListPageProps {
   posts: Post[];
 }

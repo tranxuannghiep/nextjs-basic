@@ -12,6 +12,8 @@ import rehypeStringify from 'rehype-stringify';
 import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkPrism from 'remark-prism';
+import Script from 'next/script';
 import * as React from 'react';
 
 export interface BlogDetailPageProps {
@@ -28,6 +30,7 @@ export default function BlogDetailPage({ post }: BlogDetailPageProps) {
       <p>{post.title}</p>
       <p>{post.author?.name}</p>
       <div dangerouslySetInnerHTML={{ __html: post.htmlContent || '' }}></div>
+      <Script src="/prism.js" strategy="afterInteractive" />
     </Box>
   );
 }
@@ -53,6 +56,7 @@ export const getStaticProps: GetStaticProps<BlogDetailPageProps> = async (
   const file = await unified()
     .use(remarkParse)
     .use(remarkToc)
+    .use(remarkPrism)
     .use(remarkRehype)
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
