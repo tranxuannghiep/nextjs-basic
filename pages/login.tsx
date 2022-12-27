@@ -1,4 +1,6 @@
 import { LoginForm } from '@/components/auth';
+import { LoginPayload } from '@/models';
+import { Box, Paper, Typography } from '@mui/material';
 import { useAuth } from 'hooks';
 import { useRouter } from 'next/router';
 
@@ -8,28 +10,49 @@ export default function LoginPage() {
   });
   const router = useRouter();
 
-  const handleLoginClick = async () => {
-    try {
-      await login();
-      console.log('redirect to dashboard');
-      router.push('/about');
-    } catch (error) {}
-  };
+  // const handleLoginClick = async () => {
+  //   try {
+  //     await login();
+  //     console.log('redirect to dashboard');
+  //     router.push('/about');
+  //   } catch (error) {}
+  // };
 
-  const handleLogoutClick = async () => {
+  // const handleLogoutClick = async () => {
+  //   try {
+  //     await logout();
+  //   } catch (error) {}
+  // };
+
+  const handleSubmit = async (values: LoginPayload) => {
     try {
-      await logout();
+      await login(values);
+      router.push('/');
     } catch (error) {}
   };
   return (
-    <div>
-      {/* <h1>Login Page</h1>
+    <Box>
+      <Paper
+        elevation={4}
+        sx={{
+          mx: 'auto',
+          mt: 8,
+          p: 4,
+          maxWidth: '480px',
+          textAlign: 'center',
+        }}
+      >
+        {/* <h1>Login Page</h1>
       {isLoading && <p>Loading...</p>} */}
-      {/* <p>{JSON.stringify(profile || {}, null, 2)}</p> */}
-      <LoginForm />
-      {/* <button onClick={handleLoginClick}>Login</button>
+        {/* <p>{JSON.stringify(profile || {}, null, 2)}</p> */}
+        <Typography component="h1" variant="h5" mb={4}>
+          Login
+        </Typography>
+        <LoginForm onSubmit={handleSubmit} />
+        {/* <button onClick={handleLoginClick}>Login</button>
       <button onClick={handleLogoutClick}>Logout</button>
       <button onClick={() => router.push('/about')}>About</button> */}
-    </div>
+      </Paper>
+    </Box>
   );
 }

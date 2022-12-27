@@ -1,3 +1,4 @@
+import { LoginPayload } from '@/models';
 import { authApi } from 'api-client';
 import useSWR from 'swr';
 import type { PublicConfiguration, BareFetcher } from 'swr/_internal';
@@ -17,11 +18,8 @@ export const useAuth = (options?: Partial<PublicConfiguration<any, any, BareFetc
 
   const isFirstLoading = profile === undefined && error === undefined;
 
-  async function login() {
-    await authApi.login({
-      username: 'david',
-      password: '123123',
-    });
+  async function login(values: LoginPayload) {
+    await authApi.login(values);
     await mutate();
   }
 
