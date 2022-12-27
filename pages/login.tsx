@@ -1,3 +1,4 @@
+import { LoginForm } from '@/components/auth';
 import { useAuth } from 'hooks';
 import { useRouter } from 'next/router';
 
@@ -22,12 +23,13 @@ export default function LoginPage() {
   };
   return (
     <div>
-      <h1>Login Page</h1>
-      {isLoading && <p>Loading...</p>}
-      <p>{JSON.stringify(profile || {}, null, 2)}</p>
-      <button onClick={handleLoginClick}>Login</button>
+      {/* <h1>Login Page</h1>
+      {isLoading && <p>Loading...</p>} */}
+      {/* <p>{JSON.stringify(profile || {}, null, 2)}</p> */}
+      <LoginForm />
+      {/* <button onClick={handleLoginClick}>Login</button>
       <button onClick={handleLogoutClick}>Logout</button>
-      <button onClick={() => router.push('/about')}>About</button>
+      <button onClick={() => router.push('/about')}>About</button> */}
     </div>
   );
 }
