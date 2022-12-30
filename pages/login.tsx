@@ -27,7 +27,6 @@ export default function LoginPage() {
   const handleSubmit = async (values: LoginPayload) => {
     try {
       await login(values);
-      console.log(router.query, router.query.from);
       if (router.query && router.query.from) {
         router.push(router.query.from as string);
       } else {
