@@ -9,7 +9,7 @@ export default function middleware(req: NextRequest) {
   //   return NextResponse.redirect(loginUrl);
   // }
   const route = getRouteRegex('/blog/[slug]');
-  if (route.re.test(req.nextUrl.pathname)) {
+  if (!verify && route.re.test(req.nextUrl.pathname)) {
     const loginUrl = new URL('/login', url);
     return NextResponse.redirect(loginUrl);
   }

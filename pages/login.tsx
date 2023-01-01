@@ -27,11 +27,8 @@ export default function LoginPage() {
   const handleSubmit = async (values: LoginPayload) => {
     try {
       await login(values);
-      if (router.query && router.query.from) {
-        router.push(router.query.from as string);
-      } else {
-        router.replace('/');
-      }
+      console.log(router);
+      // router.replace((router.query.from && decodeURIComponent(router.query.from as string)) || '/');
       // if (window.history.length > 1 && document.referrer.indexOf(window.location.host) !== -1) {
       //   router.back();
       // } else {
