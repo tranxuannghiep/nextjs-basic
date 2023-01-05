@@ -1,4 +1,5 @@
 import { LoginForm } from '@/components/auth';
+import { MainLayout } from '@/components/layout';
 import { LoginPayload } from '@/models';
 import { Box, Paper, Typography } from '@mui/material';
 import { useAuth } from 'hooks';
@@ -27,8 +28,9 @@ export default function LoginPage() {
   const handleSubmit = async (values: LoginPayload) => {
     try {
       await login(values);
-      console.log(router);
-      // router.replace((router.query.from && decodeURIComponent(router.query.from as string)) || '/');
+      router.replace(
+        (router.query.redirect && decodeURIComponent(router.query.redirect as string)) || '/'
+      );
       // if (window.history.length > 1 && document.referrer.indexOf(window.location.host) !== -1) {
       //   router.back();
       // } else {
@@ -62,3 +64,4 @@ export default function LoginPage() {
     </Box>
   );
 }
+LoginPage.Layout = MainLayout;

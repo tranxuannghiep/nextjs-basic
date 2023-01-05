@@ -2,6 +2,7 @@ import { useAuth } from '@/hooks';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { isEmpty } from 'lodash';
+import { LinearProgress } from '@mui/material';
 export interface ProtectedRouteProps {
   children: any;
 }
@@ -12,12 +13,19 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     revalidateOnMount: false,
   });
   React.useEffect(() => {
-    if (isEmpty(profile))
-      router.push({
+    if (isEmpty(profile)) {
+      router.replace({
         pathname: '/login',
-        query: { from: router.pathname },
+        query: {
+          redirect: router.asPath,
+        },
       });
+    }
   }, [router, profile]);
 
-  return children;
+  if (!isEmpty(profile)) {
+    return children;
+  }
+
+  return <LinearProgress style={{ position: 'absolute', top: 0, width: '100%' }} />;
 }
