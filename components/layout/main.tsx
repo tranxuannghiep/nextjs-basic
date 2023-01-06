@@ -10,7 +10,7 @@ export function MainLayout({ children }: LayoutProps) {
     return () => console.log('Main Layout unmounting');
   }, []);
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Stack minHeight="100vh">
         <Header />
         <Box component="main" flexGrow={1}>

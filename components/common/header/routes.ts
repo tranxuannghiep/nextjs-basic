@@ -4,8 +4,8 @@ export const ROUTE_LIST = [
     path: '/',
   },
   {
-    label: 'Works',
-    path: '/works',
+    label: 'Products',
+    path: '/products',
   },
   {
     label: 'Blog',
