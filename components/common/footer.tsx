@@ -23,7 +23,7 @@ export function Footer() {
   return (
     <Box component="footer" textAlign="center" py={2}>
       <Stack direction="row" justifyContent="center">
-        {socialLinks.map((social, index) => (
+        {/* {socialLinks.map((social, index) => (
           <Box
             key={index}
             component="a"
@@ -32,9 +32,10 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {/* <Icon component={social.icon} fontSize="large" /> */}
+            <Icon component={social.icon} fontSize="large" />
           </Box>
-        ))}
+        ))} */}
+        Footer
       </Stack>
       <Typography>Copyright ©{new Date().getFullYear()} All rights reserved </Typography>
     </Box>
