@@ -28,11 +28,11 @@ export function Footer() {
             key={index}
             component="a"
             p={2}
-            // href={social.url}
-            // target="_blank"
-            // rel="noopener noreferrer"
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Icon component={social.icon} fontSize="large" />
+            {/* <Icon component={social.icon} fontSize="large" /> */}
           </Box>
         ))}
       </Stack>
