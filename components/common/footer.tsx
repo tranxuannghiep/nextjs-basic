@@ -1,25 +1,29 @@
-import { Facebook, Instagram, Twitter, LinkedIn } from '@mui/icons-material';
+import Facebook from '@mui/icons-material/Facebook';
+import Instagram from '@mui/icons-material/Instagram';
+import Twitter from '@mui/icons-material/Twitter';
+import LinkedIn from '@mui/icons-material/LinkedIn';
 import { Box, Icon, Stack, Typography } from '@mui/material';
 
+const socialLinks = [
+  {
+    icon: Facebook,
+    url: 'https://www.google.com/',
+  },
+  {
+    icon: Instagram,
+    url: 'https://www.google.com/',
+  },
+  {
+    icon: Twitter,
+    url: 'https://www.google.com/',
+  },
+  {
+    icon: LinkedIn,
+    url: 'https://www.google.com/',
+  },
+];
+
 export function Footer() {
-  const socialLinks = [
-    {
-      icon: Facebook,
-      url: 'https://www.google.com/',
-    },
-    {
-      icon: Instagram,
-      url: 'https://www.google.com/',
-    },
-    {
-      icon: Twitter,
-      url: 'https://www.google.com/',
-    },
-    {
-      icon: LinkedIn,
-      url: 'https://www.google.com/',
-    },
-  ];
   return (
     <Box component="footer" textAlign="center" py={2}>
       <Stack direction="row" justifyContent="center">
