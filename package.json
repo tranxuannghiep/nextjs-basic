@@ -16,7 +16,6 @@
     "@hookform/resolvers": "^2.9.10",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.0",
-    "@mui/styles": "^5.11.2",
     "@next/font": "^13.0.7",
     "@types/axios": "^0.14.0",
     "@types/cookies": "^0.7.7",

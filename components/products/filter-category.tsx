@@ -1,36 +1,25 @@
 import { Box, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles(() => {
-  const theme = useTheme();
-  return {
-    root: {
-      padding: theme.spacing(2),
+const MenuCategory = styled('ul')(({ theme }) => ({
+  padding: 0,
+  margin: 0,
+  listStyleType: 'none',
+
+  '& > li': {
+    marginTop: theme.spacing(1),
+    transition: 'all .25s',
+    '&:hover': {
+      cursor: 'pointer',
     },
-
-    menu: {
-      padding: 0,
-      margin: 0,
-      listStyleType: 'none',
-
-      '& > li': {
-        marginTop: theme.spacing(1),
-        transition: 'all .25s',
-        '&:hover': {
-          cursor: 'pointer',
-        },
-      },
-    },
-  };
-});
+  },
+}));
 
 export function FilterByCategory() {
-  const classes = useStyles();
   return (
-    <Box className={classes.root}>
+    <Box padding={2}>
       <Typography variant="subtitle2">DANH MỤC SẢN PHẨM</Typography>
-      <ul className={classes.menu}>
+      <MenuCategory>
         <li>
           <Typography variant="body2">Danh mục 1</Typography>
         </li>
@@ -40,7 +29,7 @@ export function FilterByCategory() {
         <li>
           <Typography variant="body2">Danh mục 3</Typography>
         </li>
-      </ul>
+      </MenuCategory>
     </Box>
   );
 }

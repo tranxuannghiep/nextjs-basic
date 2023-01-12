@@ -1,39 +1,35 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles(() => {
-  const theme = useTheme();
-  return {
-    root: {
-      padding: theme.spacing(2),
-      borderTop: `1px solid ${theme.palette.grey[300]}`,
-    },
-    range: {
-      display: 'flex',
-      flexFlow: 'row nowrap',
-      alignItems: 'center',
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-      '&>span': {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-      },
-    },
-  };
-});
+const Wrapped = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: `1px solid ${theme.palette.grey[300]}`,
+}));
+
+const Range = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'nowrap',
+  alignItems: 'center',
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(1),
+  maxWidth: 200,
+
+  '&>span': {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+}));
 
 export function FilterByPrice() {
-  const classes = useStyles();
   return (
-    <Box className={classes.root}>
+    <Wrapped>
       <Typography variant="subtitle2">CHỌN KHOẢNG GIÁ</Typography>
-      <Box className={classes.range}>
+      <Range>
         <TextField name="salePrice_gte" size="small" />
         <span>-</span>
         <TextField name="salePrice_lte" size="small" />
-      </Box>
+      </Range>
       <Button variant="outlined">Áp dụng</Button>
-    </Box>
+    </Wrapped>
   );
 }
