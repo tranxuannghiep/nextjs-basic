@@ -1,18 +1,6 @@
 import { MainLayout } from '@/components/layout';
 import { ProductFilters, ProductList } from '@/components/products';
-import { Box, Container, Grid, Paper } from '@mui/material';
-import { styled } from '@mui/system';
-
-const Pagination = styled(Grid)(
-  () => `
-    pagination: {
-      display: flex,
-      flexFlow: row nowrap,
-      justifyContent: center,
-      marginTop: 30px,
-      paddingBottom: 20px,
-    },`
-);
+import { Box, Container, Grid, Pagination, Paper } from '@mui/material';
 
 const productList = [
   {
@@ -83,6 +71,17 @@ export default function ProductsPage() {
           </Grid>
           <Grid item flexGrow={1}>
             <ProductList productList={productList} />
+            <Box
+              sx={{
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                justifyContent: 'center',
+                mt: '30px',
+                pb: '20px',
+              }}
+            >
+              <Pagination count={6} color="primary" onChange={() => {}} page={1} />
+            </Box>
           </Grid>
         </Grid>
       </Container>
