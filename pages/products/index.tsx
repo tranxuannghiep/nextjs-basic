@@ -18,55 +18,55 @@ const productList = [
   {
     id: '1',
     title: 'Dac nhan tam',
-    description: 'Dac nhan tam',
+    description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
     price: 12,
     image: [
-      'https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg',
+      'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
     ],
   },
   {
     id: '2',
     title: 'Dac nhan tam',
-    description: 'Dac nhan tam',
+    description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
     price: 12,
     image: [
-      'https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg',
+      'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
     ],
   },
   {
     id: '6',
     title: 'Dac nhan tam',
-    description: 'Dac nhan tam',
+    description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
     price: 12,
     image: [
-      'https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg',
+      'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
     ],
   },
   {
     id: '3',
     title: 'Dac nhan tam',
-    description: 'Dac nhan tam',
+    description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
     price: 12,
     image: [
-      'https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg',
+      'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
     ],
   },
   {
     id: '4',
     title: 'Dac nhan tam',
-    description: 'Dac nhan tam',
+    description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
     price: 12,
     image: [
-      'https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg',
+      'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
     ],
   },
   {
     id: '5',
     title: 'Dac nhan tam',
-    description: 'Dac nhan tam',
+    description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
     price: 12,
     image: [
-      'https://salt.tikicdn.com/cache/280x280/ts/product/90/49/97/ec88ab408c1997378344486c94dbac40.jpg',
+      'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
     ],
   },
 ];
