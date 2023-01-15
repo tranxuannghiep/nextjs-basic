@@ -9,7 +9,7 @@ export interface IProductListProps {
 
 export function ProductList({ productList }: IProductListProps) {
   return (
-    <Box>
+    <Box mt={1}>
       <Grid container spacing={1.5}>
         {productList.map((product) => (
           <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>

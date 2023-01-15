@@ -1,5 +1,6 @@
 import { MainLayout } from '@/components/layout';
 import { ProductFilters, ProductList } from '@/components/products';
+import { ProductSort } from '@/components/products/product-sort';
 import { Box, Container, Grid, Pagination, Paper } from '@mui/material';
 
 const productList = [
@@ -70,6 +71,7 @@ export default function ProductsPage() {
             </Paper>
           </Grid>
           <Grid item flexGrow={1}>
+            <ProductSort />
             <ProductList productList={productList} />
             <Box
               sx={{
