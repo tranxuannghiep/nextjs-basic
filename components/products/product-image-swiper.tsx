@@ -1,5 +1,5 @@
-import { Box, IconButton } from '@mui/material';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Box, Container, IconButton } from '@mui/material';
+import { Dispatch, SetStateAction, useState, CSSProperties } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import Image from 'next/image';
 
 export interface ProductImageSwiperProps {
   srcList: string[];
@@ -21,117 +22,106 @@ export function ProductImageSwiper({ show, setShow, srcList }: ProductImageSwipe
     <Box
       sx={{
         display: show ? 'block' : 'none',
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
         zIndex: 1,
         backgroundColor: 'rgba(0,0,0,0.95)',
+        padding: '20px',
       }}
     >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 10,
-          right: 10,
-          zIndex: 2,
-        }}
-      >
-        <IconButton onClick={() => setShow(false)}>
-          <CloseIcon color="primary" fontSize="large" />
-        </IconButton>
-      </Box>
-      <Box
-        sx={{
-          width: '600px',
-        }}
-      >
-        <Swiper
-          cssMode={true}
-          // style={{
-          //   '--swiper-navigation-color': '#fff',
-          //   '--swiper-pagination-color': '#fff',
-          // }}
-          keyboard={true}
-          spaceBetween={10}
-          navigation={true}
-          thumbs={{
-            swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+      <Container sx={{ height: '100%' }}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            zIndex: 2,
           }}
-          modules={[Navigation, Thumbs]}
-          className="mySwiper2"
         >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
-        </Swiper>
-        <Swiper
-          onSwiper={setThumbsSwiper}
-          spaceBetween={10}
-          slidesPerView={10}
-          modules={[Navigation, Thumbs]}
-          className="mySwiper2"
-        >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
-        </Swiper>
-      </Box>
+          <IconButton onClick={() => setShow(false)}>
+            <CloseIcon color="primary" fontSize="large" />
+          </IconButton>
+        </Box>
+        <Box sx={{ height: '100%' }}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            height="calc(100% - 40px)"
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: '1',
+              }}
+            >
+              <Box
+                sx={{
+                  width: '600px',
+                  margin: '0 auto',
+                }}
+              >
+                <Swiper
+                  cssMode={true}
+                  style={
+                    {
+                      '--swiper-navigation-color': '#fff',
+                      '--swiper-pagination-color': '#fff',
+                      height: '100%',
+                      padding: '20px 100px 40px',
+                    } as CSSProperties
+                  }
+                  navigation={true}
+                  thumbs={{
+                    swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+                  }}
+                  modules={[Navigation, Thumbs]}
+                >
+                  {srcList.map((src, index) => (
+                    <SwiperSlide key={index}>
+                      <Box sx={{ width: '100%', paddingTop: '100%' }}>
+                        <Image src={src} alt="image" fill={true} />
+                      </Box>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                flex: '0 0 130px',
+                justifySelf: 'flex-end',
+              }}
+            >
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={15}
+                slidesPerView={7}
+                modules={[Navigation, Thumbs]}
+              >
+                {srcList.map((src, index) => (
+                  <SwiperSlide key={index}>
+                    <Box
+                      sx={{
+                        maxWidth: '100px',
+                        height: '100px',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <Image src={src} alt="image" fill={true} />
+                    </Box>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          </Box>
+        </Box>
+      </Container>
     </Box>
   );
 }
