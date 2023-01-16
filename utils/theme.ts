@@ -93,4 +93,4 @@ export let theme = createTheme({
     },
   },
 });
-theme = responsiveFontSizes(theme);
+// theme = responsiveFontSizes(theme);
