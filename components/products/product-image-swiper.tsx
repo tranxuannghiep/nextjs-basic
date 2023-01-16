@@ -49,10 +49,10 @@ export function ProductImageSwiper({ show, setShow, srcList }: ProductImageSwipe
       >
         <Swiper
           cssMode={true}
-          style={{
-            '--swiper-navigation-color': '#fff',
-            '--swiper-pagination-color': '#fff',
-          }}
+          // style={{
+          //   '--swiper-navigation-color': '#fff',
+          //   '--swiper-pagination-color': '#fff',
+          // }}
           keyboard={true}
           spaceBetween={10}
           navigation={true}
