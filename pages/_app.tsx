@@ -17,26 +17,26 @@ export default function App({
   pageProps,
 }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
-  useEffect(() => {
-    const fixViewport = () => {
-      const ww = window.innerWidth || document.body.clientWidth;
-      const mw = 1300;
-      const ratio = ww / mw;
+  // useEffect(() => {
+  //   const fixViewport = () => {
+  //     const ww = window.innerWidth || document.body.clientWidth;
+  //     const mw = 1300;
+  //     const ratio = ww / mw;
 
-      let zoom = '100%';
+  //     let zoom = '100%';
 
-      zoom = Math.floor(ratio * 100 - 1) + '%';
+  //     zoom = Math.floor(ratio * 100 - 1) + '%';
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      document.getElementsByTagName('html')[0].style.zoom = zoom;
-    };
+  //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //     //@ts-ignore
+  //     document.getElementsByTagName('html')[0].style.zoom = zoom;
+  //   };
 
-    fixViewport();
-    window.addEventListener('resize', function () {
-      fixViewport();
-    });
-  }, []);
+  //   fixViewport();
+  //   window.addEventListener('resize', function () {
+  //     fixViewport();
+  //   });
+  // }, []);
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
