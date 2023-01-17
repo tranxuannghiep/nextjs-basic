@@ -114,6 +114,7 @@ export function ProductImageSwiper({ show, setShow, srcList }: ProductImageSwipe
                       }}
                     >
                       <Image src={src} alt="image" fill={true} />
+                      <Box className="active-item"></Box>
                     </Box>
                   </SwiperSlide>
                 ))}

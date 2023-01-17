@@ -15,7 +15,7 @@ export function ProductListImage({ srcList, mainSrc, setMainSrc }: ProductListIm
     <Box mt={2}>
       <Grid container spacing={1}>
         {srcList.slice(0, 3).map((src, index) => (
-          <Grid key={index} item lg={3}>
+          <Grid key={index} item sm={3}>
             <Box
               sx={{
                 pt: '100%',
@@ -35,7 +35,7 @@ export function ProductListImage({ srcList, mainSrc, setMainSrc }: ProductListIm
         ))}
         {srcList.length >= 4 && (
           <>
-            <Grid item lg={3}>
+            <Grid item sm={3}>
               <Box
                 sx={{
                   pt: '100%',

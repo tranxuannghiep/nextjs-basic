@@ -56,3 +56,13 @@ a {
   background-size: cover;
   background-position: center;
 }
+
+.swiper-slide-thumb-active .active-item{
+  position: absolute;
+  z-index: 10;
+  box-shadow: rgb(0 127 240) 0px 0px 0px 4px inset;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}

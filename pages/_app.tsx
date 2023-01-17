@@ -24,8 +24,9 @@ export default function App({
       const ratio = ww / mw;
 
       let zoom = '100%';
-
-      zoom = Math.floor(ratio * 100 - 1) + '%';
+      if (ww < 1280 && ww >= 768) {
+        zoom = Math.floor(ratio * 100 - 1) + '%';
+      }
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
