@@ -201,10 +201,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         cursor: 'pointer',
                         borderRight: '1px solid #f2f2f2',
                         width: '30px',
-                        fontWeight: '16px',
                       }}
                     >
-                      <Remove />
+                      <Remove fontSize="small" />
                     </Box>
                     <Box
                       sx={{
@@ -225,10 +224,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         cursor: 'pointer',
                         borderLeft: '1px solid #f2f2f2',
                         width: '30px',
-                        fontWeight: '16px',
                       }}
                     >
-                      <Add />
+                      <Add fontSize="small" />
                     </Box>
                   </Box>
                 </Box>

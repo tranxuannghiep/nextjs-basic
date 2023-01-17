@@ -12,7 +12,7 @@ export default function CartPage() {
         <Grid item flexGrow={1}>
           <CartLeft />
         </Grid>
-        <Grid item width="310px">
+        <Grid item width="350px">
           <CartRight />
         </Grid>
       </Grid>
