@@ -1,3 +1,4 @@
+import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductListImage } from '@/components/products';
 import { ProductType } from '@/models';
@@ -18,6 +19,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   return (
     <Box>
+      <Seo
+        data={{
+          title: product.title,
+          description: product.description,
+          url: `${process.env.HOST_URL}/products/${product.id}`,
+          thumbnailUrl:
+            product.image[0] ||
+            'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
+        }}
+      />
       <Paper elevation={0} sx={{ px: 2, py: 4 }}>
         <Grid
           container

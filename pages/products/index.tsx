@@ -1,3 +1,4 @@
+import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductFilters, ProductList } from '@/components/products';
 import { ProductSort } from '@/components/products/product-sort';
@@ -93,6 +94,15 @@ const productList = [
 export default function ProductsPage() {
   return (
     <Box>
+      <Seo
+        data={{
+          title: 'Products',
+          description: 'All products of page',
+          url: `${process.env.HOST_URL}/products`,
+          thumbnailUrl:
+            'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
+        }}
+      />
       <Grid
         container
         spacing={1.5}
