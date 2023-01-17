@@ -96,6 +96,11 @@ export function ProductImageSwiper({ show, setShow, srcList }: ProductImageSwipe
               sx={{
                 flex: '0 0 130px',
                 justifySelf: 'flex-end',
+                display: {
+                  md: 'block',
+                  sm: 'none',
+                  xs: 'none',
+                },
               }}
             >
               <Swiper

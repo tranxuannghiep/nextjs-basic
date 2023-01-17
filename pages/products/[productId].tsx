@@ -19,16 +19,61 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <Box>
       <Paper elevation={0} sx={{ px: 2, py: 4 }}>
-        <Grid container spacing={2}>
-          <Grid item sm={4}>
-            <Box sx={{ pt: '100%', position: 'relative', width: '100%', cursor: 'pointer' }}>
-              <Image src={mainSrc} alt={product.title} fill={true} />
+        <Grid
+          container
+          spacing={{
+            md: 2,
+            sm: 0,
+            xs: 0,
+          }}
+        >
+          <Grid
+            item
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              margin: '0 auto',
+              width: {
+                sm: 'auto',
+                xs: '100%',
+              },
+            }}
+          >
+            <Box
+              sx={{
+                width: {
+                  sm: '500px',
+                  xs: '100%',
+                },
+              }}
+            >
+              <Box sx={{ pt: '100%', position: 'relative', width: '100%', cursor: 'pointer' }}>
+                <Image src={mainSrc} alt={product.title} fill={true} />
+              </Box>
+              <ProductListImage mainSrc={mainSrc} setMainSrc={setMainSrc} srcList={product.image} />
             </Box>
-            <ProductListImage mainSrc={mainSrc} setMainSrc={setMainSrc} srcList={product.image} />
           </Grid>
-          <Grid item sm={8}>
+          <Grid
+            item
+            flexGrow={1}
+            mt={{
+              xs: 4,
+              sm: 4,
+              md: 0,
+            }}
+          >
             <Box sx={{ height: '100%' }}>
-              <Box sx={{ height: '100%', pl: 2, borderLeft: '1px solid #f2f2f2' }}>
+              <Box
+                sx={{
+                  height: '100%',
+                  pl: 2,
+                  borderLeft: {
+                    xs: 'none',
+                    sm: 'none',
+                    md: '1px solid #f2f2f2',
+                  },
+                }}
+              >
                 <Typography component="h6" variant="body2" display="flex" alignItems="center">
                   Tác giả:
                   <Typography color="secondary" ml={1}>
@@ -77,7 +122,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     <Divider
                       orientation="vertical"
                       flexItem
-                      sx={{ mx: 1, my: 'auto', height: '10px' }}
+                      sx={{
+                        mx: 1,
+                        my: 'auto',
+                        height: '10px',
+                      }}
                     />
                     <Typography component="h6" variant="body2" color="#00ab56" fontWeight="500">
                       Thứ 4, ngày 18/01

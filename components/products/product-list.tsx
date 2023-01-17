@@ -12,7 +12,7 @@ export function ProductList({ productList }: IProductListProps) {
     <Box mt={1}>
       <Grid container spacing={1.5}>
         {productList.map((product) => (
-          <Grid key={product.id} item xs={6} sm={4} md={3} lg={3}>
+          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
             <Product product={product} />
           </Grid>
         ))}

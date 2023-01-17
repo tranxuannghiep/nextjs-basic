@@ -93,8 +93,26 @@ const productList = [
 export default function ProductsPage() {
   return (
     <Box>
-      <Grid container spacing={1.5} flexWrap="nowrap">
-        <Grid item minWidth={250}>
+      <Grid
+        container
+        spacing={1.5}
+        flexWrap="nowrap"
+        flexDirection={{
+          md: 'row',
+          sm: 'column',
+          xs: 'column',
+        }}
+      >
+        <Grid
+          item
+          sx={{
+            minWidth: {
+              md: '250px',
+              sm: '100%',
+              xs: '100%',
+            },
+          }}
+        >
           <Paper elevation={0}>
             <ProductFilters />
           </Paper>

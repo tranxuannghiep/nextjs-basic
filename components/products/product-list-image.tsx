@@ -12,10 +12,10 @@ export interface ProductListImageProps {
 export function ProductListImage({ srcList, mainSrc, setMainSrc }: ProductListImageProps) {
   const [show, setShow] = useState<boolean>(false);
   return (
-    <Box mt={2}>
+    <Box mt={2} width="100%">
       <Grid container spacing={1}>
         {srcList.slice(0, 3).map((src, index) => (
-          <Grid key={index} item sm={3}>
+          <Grid key={index} item xs={3} sm={3}>
             <Box
               sx={{
                 pt: '100%',
@@ -35,7 +35,7 @@ export function ProductListImage({ srcList, mainSrc, setMainSrc }: ProductListIm
         ))}
         {srcList.length >= 4 && (
           <>
-            <Grid item sm={3}>
+            <Grid item xs={3} sm={3}>
               <Box
                 sx={{
                   pt: '100%',
