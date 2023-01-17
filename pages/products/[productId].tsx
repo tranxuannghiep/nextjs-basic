@@ -53,7 +53,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <Box
               sx={{
                 width: {
-                  sm: '500px',
+                  sm: '400px',
                   xs: '100%',
                 },
               }}
