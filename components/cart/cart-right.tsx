@@ -1,30 +1,14 @@
-import { Box, Button, Divider, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
+import { Address } from '../common';
 
 export interface CartRightProps {}
 
 export function CartRight(props: CartRightProps) {
+  const router = useRouter();
   return (
     <Box>
-      <Paper elevation={0}>
-        <Box padding={1.5}>
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography>Giao tới</Typography>
-            <Button variant="text" sx={{ textTransform: 'none' }} color="secondary">
-              Thay đổi
-            </Button>
-          </Box>
-
-          <Box display="flex" alignItems="center">
-            <Typography fontWeight="500">Trần Xuân Nghiệp</Typography>
-            <Divider orientation="vertical" sx={{ mx: 1.5 }} flexItem />
-            <Typography fontWeight="500">0334448311</Typography>
-          </Box>
-          <Typography variant="caption" color="darkgray">
-            Ngõ 58 ngách 31 hẻm 8 đường thanh bình - mộ lao - hà đông, Phường Mộ Lao, Quận Hà Đông,
-            Hà Nội
-          </Typography>
-        </Box>
-      </Paper>
+      <Address />
       <Paper elevation={0} sx={{ my: 1.5 }}>
         <Box padding={2}>
           <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -38,7 +22,7 @@ export function CartRight(props: CartRightProps) {
           </Typography>
         </Box>
       </Paper>
-      <Button fullWidth variant="contained">
+      <Button fullWidth variant="contained" onClick={() => router.push('/payment')}>
         Mua hàng (1)
       </Button>
     </Box>
