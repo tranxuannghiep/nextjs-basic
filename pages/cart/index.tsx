@@ -1,10 +1,20 @@
 import { CartLeft, CartRight } from '@/components/cart';
+import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { Box, Grid, Typography } from '@mui/material';
 
 export default function CartPage() {
   return (
     <Box>
+      <Seo
+        data={{
+          title: 'Cart list',
+          description: 'List product you want buy',
+          url: `${process.env.HOST_URL}/cart`,
+          thumbnailUrl:
+            'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
+        }}
+      />
       <Box pb={3}>
         <Typography variant="h5">GIỎ HÀNG</Typography>
       </Box>
