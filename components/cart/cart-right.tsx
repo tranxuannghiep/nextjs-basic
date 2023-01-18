@@ -25,7 +25,7 @@ export function CartRight(props: CartRightProps) {
           </Typography>
         </Box>
       </Paper>
-      <Paper elevation={0} style={{ margin: '10px 0 20px' }}>
+      <Paper elevation={0} sx={{ my: 1.5 }}>
         <Box padding={2}>
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="body2">Tổng tiền</Typography>

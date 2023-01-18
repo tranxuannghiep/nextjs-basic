@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Box, Stack, Link as MuiLink } from '@mui/material';
+import { Box, Stack, Link as MuiLink, Badge, Divider } from '@mui/material';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { ROUTE_LIST } from './routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,6 +22,14 @@ export function HeaderDesktop() {
             </MuiLink>
           </Link>
         ))}
+        <Divider orientation="vertical" sx={{ mx: 2 }} flexItem />
+        <Link href="/cart" passHref>
+          <MuiLink component="span" className={clsx({ active: router.pathname === '/cart' })}>
+            <Badge badgeContent={1} color="warning">
+              <ShoppingCartOutlinedIcon color="info" fontSize="small" />
+            </Badge>
+          </MuiLink>
+        </Link>
       </Stack>
     </Box>
   );

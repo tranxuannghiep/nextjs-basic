@@ -66,3 +66,21 @@ a {
   right: 0;
   bottom: 0;
 }
+
+.circle-price{
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(221, 221, 227);
+}
+.circle-price.active{
+  background-color: rgb(214, 250, 223);
+  border: 1px solid rgb(8, 145, 72);
+}
