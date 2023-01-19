@@ -8,8 +8,8 @@ export default function CartPage() {
     <Box>
       <Seo
         data={{
-          title: 'Cart list',
-          description: 'List product you want buy',
+          title: 'Cart | NextJS Basic',
+          description: 'Cart page NextJs basic',
           url: `${process.env.HOST_URL}/cart`,
           thumbnailUrl:
             'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
