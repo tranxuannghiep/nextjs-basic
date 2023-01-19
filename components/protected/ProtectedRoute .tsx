@@ -27,5 +27,5 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     return children;
   }
 
-  return <LinearProgress style={{ position: 'absolute', top: 0, width: '100%' }} />;
+  return <LinearProgress style={{ position: 'fixed', top: 0, left: 0, width: '100%' }} />;
 }
