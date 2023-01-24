@@ -10,9 +10,22 @@ export function CartLeft(props: CartLeftProps) {
       <Paper elevation={0} sx={{ mb: 1.5 }}>
         <Box
           sx={{
-            display: 'grid',
-            gridTemplateColumns: '398px 130px 130px 130px 30px',
+            display: {
+              md: 'grid',
+              sm: 'flex',
+              xs: 'flex',
+            },
+            gridTemplateColumns: {
+              md: '398px 130px 130px 130px 30px',
+              sm: 'auto',
+              xs: 'auto',
+            },
             alignItems: 'center',
+            justifyContent: {
+              md: 'auto',
+              sm: 'space-between',
+              xs: 'space-between',
+            },
             px: 0.5,
           }}
         >
@@ -25,9 +38,39 @@ export function CartLeft(props: CartLeftProps) {
             <Checkbox />
             <Typography>Tất cả (1 sản phẩm)</Typography>
           </Box>
-          <Typography>Đơn giá</Typography>
-          <Typography>Số lượng</Typography>
-          <Typography>Thành tiền</Typography>
+          <Typography
+            sx={{
+              display: {
+                md: 'block',
+                sm: 'none',
+                xs: 'none',
+              },
+            }}
+          >
+            Đơn giá
+          </Typography>
+          <Typography
+            sx={{
+              display: {
+                md: 'block',
+                sm: 'none',
+                xs: 'none',
+              },
+            }}
+          >
+            Số lượng
+          </Typography>
+          <Typography
+            sx={{
+              display: {
+                md: 'block',
+                sm: 'none',
+                xs: 'none',
+              },
+            }}
+          >
+            Thành tiền
+          </Typography>
           <IconButton>
             <Delete />
           </IconButton>

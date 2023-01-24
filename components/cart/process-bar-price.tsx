@@ -86,7 +86,16 @@ export function ProcessBarPrice(props: ProcessBarPriceProps) {
           </Box>
         </Box>
       </Box>
-      <Box display="flex" alignItems="center">
+      <Box
+        sx={{
+          display: {
+            md: 'flex',
+            sm: 'none',
+            xs: 'none',
+          },
+          alignItems: 'center',
+        }}
+      >
         <Box
           sx={{
             position: 'relative',
