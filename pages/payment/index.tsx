@@ -15,11 +15,31 @@ export default function PaymentPage() {
             'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
         }}
       />
-      <Grid container flexWrap="nowrap" spacing={2}>
-        <Grid item flexGrow={1}>
+      <Grid
+        container
+        flexWrap="nowrap"
+        spacing={2}
+        sx={{
+          flexDirection: {
+            md: 'row',
+            sm: 'column',
+            xs: 'column',
+          },
+        }}
+      >
+        <Grid item>
           <PaymentLeft />
         </Grid>
-        <Grid item width="350px">
+        <Grid
+          item
+          sx={{
+            width: {
+              md: '350px',
+              sm: '500px',
+              xs: '100%',
+            },
+          }}
+        >
           <PaymentRight />
         </Grid>
       </Grid>

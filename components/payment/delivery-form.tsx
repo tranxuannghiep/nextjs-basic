@@ -13,9 +13,17 @@ export function DeliveryForm(props: DeliveryFormProps) {
           sx={{
             background: '#f0f8ff',
             border: '1px solid #c2e1ff',
-            p: 2,
+            p: {
+              md: 2,
+              sm: 1,
+              xs: 1,
+            },
             borderRadius: '10px',
-            width: '500px',
+            width: {
+              md: '500px',
+              sm: '100%',
+              xs: '100%',
+            },
             position: 'relative',
           }}
         >
@@ -34,18 +42,30 @@ export function DeliveryForm(props: DeliveryFormProps) {
                 fill={true}
               />
             </Box>
-            <Typography variant="body2" mx={0.5}>
+            <Typography
+              variant="body2"
+              mx={0.5}
+              sx={{ fontSize: { md: '14px', sm: '12px', xs: '12px' } }}
+            >
               Giao Tiết Kiệm
             </Typography>
             <Paper elevation={0} sx={{ display: 'flex', alignItems: 'center', px: 0.5 }}>
-              <Typography variant="body2" fontWeight="500" color="#00ab56" mr={0.5}>
+              <Typography variant="caption" fontWeight="500" color="#00ab56" mr={0.5}>
                 -24K
               </Typography>
               <Box
                 sx={{
                   position: 'relative',
-                  width: '69px',
-                  height: '11px',
+                  width: {
+                    md: '69px',
+                    sm: '50px',
+                    xs: '50px',
+                  },
+                  height: {
+                    md: '11px',
+                    sm: '8px',
+                    xs: '8px',
+                  },
                 }}
               >
                 <Image

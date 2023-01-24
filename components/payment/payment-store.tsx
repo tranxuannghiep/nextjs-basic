@@ -11,13 +11,26 @@ export function PaymentStore(props: PaymentStoreProps) {
       sx={{
         border: '1px solid #dddde3',
         borderRadius: 3,
-        p: 2,
+        p: {
+          md: 2,
+          sm: 1,
+          xs: 1,
+        },
         mt: 6,
         position: 'relative',
       }}
     >
       <Grid container flexWrap="nowrap" spacing={4}>
-        <Grid item width="500px">
+        <Grid
+          item
+          sx={{
+            width: {
+              md: '500px',
+              sm: '100%',
+              xs: '100%',
+            },
+          }}
+        >
           <Box display="flex" alignItems="center" justifyContent="space-between" mt={1}>
             <Box display="flex" alignItems="center">
               <Box
@@ -48,8 +61,35 @@ export function PaymentStore(props: PaymentStoreProps) {
           </Box>
           <PaymentItem />
           <PaymentItem />
+          <Box
+            sx={{
+              display: {
+                md: 'none',
+                sm: 'block',
+                xs: 'block',
+              },
+              background: '#fafafa',
+              padding: '6px 8px',
+              borderRadius: '0px 0px 12px 12px',
+              m: '16px -8px -8px',
+            }}
+          >
+            <Typography variant="body2" color="GrayText">
+              Được giao bởi TikiNOW Smart Logistics
+            </Typography>
+          </Box>
         </Grid>
-        <Grid item flex={1}>
+        <Grid
+          item
+          flex={1}
+          sx={{
+            display: {
+              md: 'block',
+              sm: 'none',
+              xs: 'none',
+            },
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
