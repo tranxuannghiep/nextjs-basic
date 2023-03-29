@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 let loading = 0;
 const showLoading = () => {
   if (loading === 0) {
@@ -21,10 +21,11 @@ const axiosClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 axiosClient.interceptors.request.use(
-  function (config) {
+  function (config: AxiosRequestConfig) {
     showLoading();
     return config;
   },
@@ -35,7 +36,7 @@ axiosClient.interceptors.request.use(
 );
 
 axiosClient.interceptors.response.use(
-  function (response) {
+  function (response: AxiosResponse) {
     hideLoading();
     return response.data;
   },

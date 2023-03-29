@@ -2,6 +2,7 @@ import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductFilters, ProductList } from '@/components/products';
 import { ProductSort } from '@/components/products/product-sort';
+import { useProduct } from '@/hooks/useProduct';
 import { Box, Grid, Pagination, Paper } from '@mui/material';
 
 const productList = [
@@ -92,6 +93,7 @@ const productList = [
 ];
 
 export default function ProductsPage() {
+  const { dataProduct } = useProduct();
   return (
     <Box>
       <Seo
@@ -129,7 +131,7 @@ export default function ProductsPage() {
         </Grid>
         <Grid item flexGrow={1}>
           <ProductSort />
-          <ProductList productList={productList} />
+          <ProductList productList={dataProduct?.data || []} />
           <Box
             sx={{
               display: 'flex',

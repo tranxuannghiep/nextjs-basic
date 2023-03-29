@@ -2,6 +2,9 @@ export interface ProductType {
   id?: string;
   title: string;
   description: string;
+  original_price: number;
   price: number;
-  image: string[];
+  images?: string[];
+  quantity: number;
+  quantity_sold: number;
 }

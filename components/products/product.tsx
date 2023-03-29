@@ -3,6 +3,7 @@ import { Box, Divider, Paper, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from '@mui/system';
+import { formatPrice } from '@/utils';
 
 export interface ProductProps {
   product: ProductType;
@@ -24,9 +25,20 @@ export function Product({ product }: ProductProps) {
     <ProductWrapped elevation={0}>
       <Link href={`/products/${product.id}`} className="product-item">
         <Box className="thumbnail" sx={{ pt: '100%', position: 'relative', width: '100%' }}>
-          <Image src={product.image[0]} alt="product image" fill={true} />
+          <Image
+            src={
+              product.images
+                ? product.images[0]
+                : 'https://pkmmampang.depok.go.id/assets/images/default.jpg'
+            }
+            alt="product image"
+            fill={true}
+          />
         </Box>
-        <Box className="info" sx={{ p: 1, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box
+          className="info"
+          sx={{ px: 2, py: 1, flexGrow: 1, display: 'flex', flexDirection: 'column' }}
+        >
           <Typography
             variant="body1"
             component="h6"
@@ -56,7 +68,7 @@ export function Product({ product }: ProductProps) {
             {product.description}
           </Typography>
           <Typography color="primary" component="h6" variant="h6" pt={0.5}>
-            {product.price}.000
+            {formatPrice(product.price)}
           </Typography>
         </Box>
         <Divider />

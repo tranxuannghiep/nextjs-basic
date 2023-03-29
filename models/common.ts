@@ -15,3 +15,7 @@ export type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
   emotionCache?: EmotionCache;
 };
+
+export interface ListResponse<T> {
+  data: T[];
+}

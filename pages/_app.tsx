@@ -5,12 +5,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import axiosClient from 'api-client/axiosClient';
 import { AppPropsWithLayout } from 'models';
 import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { SWRConfig } from 'swr';
 import { createEmotionCache, theme } from 'utils';
 import '../styles/globals.css';
 import '../styles/prism.css';
 
 const clientSideEmotionCache = createEmotionCache();
+const queryClient = new QueryClient();
 export default function App({
   Component,
   emotionCache = clientSideEmotionCache,
@@ -43,9 +45,11 @@ export default function App({
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <SWRConfig value={{ fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false }}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <QueryClientProvider client={queryClient}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </QueryClientProvider>
         </SWRConfig>
       </ThemeProvider>
     </CacheProvider>
