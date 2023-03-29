@@ -1,7 +1,9 @@
+import { productApi } from '@/api-client';
 import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductListImage } from '@/components/products';
 import { ProductType } from '@/models';
+import { formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Button, Divider, Grid, Paper, Typography } from '@mui/material';
@@ -15,7 +17,9 @@ export interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [viewMore, setViewMore] = useState(false);
-  const [mainSrc, setMainSrc] = useState<string>(product.image[0]);
+  const [mainSrc, setMainSrc] = useState<string>(
+    product.images ? product.images[0] : 'https://pkmmampang.depok.go.id/assets/images/default.jpg'
+  );
 
   return (
     <Box>
@@ -24,9 +28,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           title: product.title,
           description: product.description,
           url: `${process.env.HOST_URL}/products/${product.id}`,
-          thumbnailUrl:
-            product.image[0] ||
-            'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
+          thumbnailUrl: product.images
+            ? product.images[0]
+            : 'https://www.drupal.org/files/project-images/nextjs-icon-dark-background.png',
         }}
       />
       <Paper elevation={0} sx={{ px: 2, py: 4 }}>
@@ -61,7 +65,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <Box sx={{ pt: '100%', position: 'relative', width: '100%', cursor: 'pointer' }}>
                 <Image src={mainSrc} alt={product.title} fill={true} />
               </Box>
-              <ProductListImage mainSrc={mainSrc} setMainSrc={setMainSrc} srcList={product.image} />
+              <ProductListImage
+                mainSrc={mainSrc}
+                setMainSrc={setMainSrc}
+                srcList={product.images || []}
+              />
             </Box>
           </Grid>
           <Grid
@@ -95,7 +103,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   {product.title}
                 </Typography>
                 <Typography component="h6" variant="body1" color="darkgrey" mb={2}>
-                  Đã bán: 4
+                  Đã bán: {product.quantity_sold}
                 </Typography>
                 <Box
                   sx={{
@@ -104,7 +112,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   }}
                 >
                   <Typography component="h6" variant="h4" color="primary">
-                    {product.price}.000
+                    {formatPrice(product.price)}
                   </Typography>
                 </Box>
                 <Box
@@ -295,8 +303,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       { params: { productId: '2' } },
       { params: { productId: '3' } },
       { params: { productId: '4' } },
-      { params: { productId: '5' } },
-      { params: { productId: '6' } },
     ],
     fallback: false,
   };
@@ -305,24 +311,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<ProductDetailProps> = async (
   context: GetStaticPropsContext
 ) => {
-  const slug = context.params?.productId;
-  if (!slug) return { notFound: true };
-  return {
-    props: {
-      product: {
-        id: '5',
-        title: 'Dac nhan tam',
-        description: 'Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g',
-        price: 12,
-        image: [
-          'https://salt.tikicdn.com/cache/280x280/ts/product/8f/8d/a9/08b2f06abf3af5c9b7b29198d2a60f34.png',
-          'https://salt.tikicdn.com/cache/750x750/media/catalog/producttmp/21/94/98/30e0f06bd9075364dc2c9169dbcbdf0d.jpg',
-          'https://salt.tikicdn.com/cache/750x750/media/catalog/producttmp/3f/bc/2a/69d885310f1ea545a7bd10cfce23fc53.jpg',
-          'https://salt.tikicdn.com/cache/750x750/ts/product/ea/80/aa/76487dc3664207976a100b4b1b932cd6.jpg',
-          'https://salt.tikicdn.com/cache/750x750/ts/product/c5/9a/8a/5d2f788f442705be94b5f5b3c1f3072d.jpg',
-          'https://salt.tikicdn.com/cache/750x750/media/catalog/producttmp/ea/80/aa/becf674be5294be90a47551c68191737.jpg',
-        ],
+  try {
+    const slug = context.params?.productId;
+    if (!slug) return { notFound: true };
+
+    const dataProducts = await productApi.getAll();
+    const productDetail = dataProducts.data.find((product: any) => product.id == slug);
+    if (!productDetail) return { notFound: true };
+
+    return {
+      props: {
+        product: productDetail,
       },
-    },
-  };
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 };

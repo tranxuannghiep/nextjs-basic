@@ -17,7 +17,7 @@ const hideLoading = () => {
 };
 
 const axiosClient = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://localhost:3000/api/',
   headers: {
     'Content-Type': 'application/json',
   },

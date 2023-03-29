@@ -19,3 +19,7 @@ export type AppPropsWithLayout = AppProps & {
 export interface ListResponse<T> {
   data: T[];
 }
+
+export interface DataResponse<T> {
+  data: T;
+}
