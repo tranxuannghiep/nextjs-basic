@@ -1,15 +1,16 @@
-import { productApi } from '@/api-client';
+import { productApiServer } from '@/api-server';
 import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductListImage } from '@/components/products';
 import { ProductType } from '@/models';
-import { formatPrice } from '@/utils';
+import { CONFIG, formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Button, Divider, Grid, Paper, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export interface ProductDetailProps {
   product: ProductType;
@@ -18,8 +19,17 @@ export interface ProductDetailProps {
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [viewMore, setViewMore] = useState(false);
   const [mainSrc, setMainSrc] = useState<string>(
-    product.images ? product.images[0] : 'https://pkmmampang.depok.go.id/assets/images/default.jpg'
+    product?.images ? product.images[0] : CONFIG.DEFAULT_IMAGE
   );
+
+  useEffect(() => {
+    setMainSrc(product?.images ? product.images[0] : CONFIG.DEFAULT_IMAGE);
+  }, [product]);
+
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Box>
@@ -297,14 +307,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 ProductDetail.Layout = MainLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const data = await productApiServer.getAll();
+  const products = data.data;
+
   return {
-    paths: [
-      { params: { productId: '1' } },
-      { params: { productId: '2' } },
-      { params: { productId: '3' } },
-      { params: { productId: '4' } },
-    ],
-    fallback: false,
+    paths: products.map((product) => ({ params: { productId: product.id?.toString() } })),
+
+    fallback: true,
   };
 };
 
@@ -315,13 +324,13 @@ export const getStaticProps: GetStaticProps<ProductDetailProps> = async (
     const slug = context.params?.productId;
     if (!slug) return { notFound: true };
 
-    const dataProducts = await productApi.getAll();
-    const productDetail = dataProducts.data.find((product: any) => product.id == slug);
-    if (!productDetail) return { notFound: true };
+    const data = await productApiServer.getDetail(slug as string);
+
+    if (!data || !data.data) return { notFound: true };
 
     return {
       props: {
-        product: productDetail,
+        product: data.data,
       },
     };
   } catch (error) {

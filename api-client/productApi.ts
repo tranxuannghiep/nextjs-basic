@@ -12,4 +12,8 @@ export const productApi = {
     const productId = queryKey[1];
     return axiosClient.get(`/book/${productId}`);
   },
+
+  async getDetail(productId: string): Promise<DataResponse<ProductType>> {
+    return axiosClient.get(`/book/${productId}`);
+  },
 };
