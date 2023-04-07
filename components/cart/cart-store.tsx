@@ -4,10 +4,19 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 import { CartItem } from './cart-item';
 import { ProcessBarPrice } from './process-bar-price';
 import Link from 'next/link';
+import { CartType } from '@/store/store-cart';
+import { useMemo } from 'react';
 
-export interface CartStoreProps {}
+export interface CartStoreProps {
+  books: CartType[];
+  storeName: string;
+}
 
-export function CartStore(props: CartStoreProps) {
+export function CartStore({ books, storeName }: CartStoreProps) {
+  const totalPrice = useMemo(() => {
+    return books.reduce((acc, book) => acc + book.price * book.quantity, 0);
+  }, [books]);
+
   return (
     <Paper elevation={0} sx={{ mb: 1.5 }}>
       <Box
@@ -32,7 +41,7 @@ export function CartStore(props: CartStoreProps) {
               }}
             />
             <Typography component="h6" variant="body2" fontWeight="500" mx={1} lineHeight="1.5">
-              Tiki Trading
+              {storeName}
             </Typography>
             <ArrowForwardIosOutlinedIcon
               sx={{
@@ -64,7 +73,9 @@ export function CartStore(props: CartStoreProps) {
           Mua thêm 25K
         </Button>
       </Box>
-      <CartItem />
+      {books.map((book) => (
+        <CartItem key={book.id} book={book} />
+      ))}
     </Paper>
   );
 }

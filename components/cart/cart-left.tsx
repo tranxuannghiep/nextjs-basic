@@ -1,10 +1,26 @@
+import useCartStore from '@/store/store-cart';
 import Delete from '@mui/icons-material/Delete';
 import { Box, Checkbox, IconButton, Paper, Typography } from '@mui/material';
+import _ from 'lodash';
+import { useMemo } from 'react';
 import { CartStore } from './cart-store';
 
 export interface CartLeftProps {}
 
 export function CartLeft(props: CartLeftProps) {
+  const { carts } = useCartStore();
+
+  const cartGroup = useMemo(() => {
+    const group = _(carts)
+      .groupBy('seller.username')
+      .map((books, username) => ({
+        username,
+        books,
+      }))
+      .value();
+    return group;
+  }, [carts]);
+
   return (
     <Box>
       <Paper elevation={0} sx={{ mb: 1.5 }}>
@@ -76,8 +92,9 @@ export function CartLeft(props: CartLeftProps) {
           </IconButton>
         </Box>
       </Paper>
-      <CartStore />
-      <CartStore />
+      {cartGroup.map((group) => (
+        <CartStore key={group.username} books={group.books} storeName={group.username} />
+      ))}
     </Box>
   );
 }

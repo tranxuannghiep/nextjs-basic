@@ -7,3 +7,5 @@ export const imageCartStripe = [
 export const CONFIG = {
   DEFAULT_IMAGE: 'https://pkmmampang.depok.go.id/assets/images/default.jpg',
 };
+
+export const NOT_FOUND_INDEX = -1;

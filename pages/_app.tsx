@@ -1,4 +1,5 @@
 import { EmptyLayout } from '@/components/layout';
+import useCartStore from '@/store/store-cart';
 import { CacheProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
@@ -19,6 +20,7 @@ export default function App({
   pageProps,
 }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
+  const { setCarts } = useCartStore();
   useEffect(() => {
     const fixViewport = () => {
       const ww = window.innerWidth || document.body.clientWidth;
@@ -40,6 +42,12 @@ export default function App({
       fixViewport();
     });
   }, []);
+
+  useEffect(() => {
+    const cartsFromLocalStorage = localStorage.getItem('carts');
+    setCarts(cartsFromLocalStorage ? JSON.parse(cartsFromLocalStorage) : []);
+  }, [setCarts]);
+
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>

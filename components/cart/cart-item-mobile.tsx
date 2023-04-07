@@ -1,12 +1,15 @@
+import { CartType } from '@/store/store-cart';
+import { CONFIG, formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
-import Delete from '@mui/icons-material/Delete';
 import Remove from '@mui/icons-material/Remove';
-import { Box, Checkbox, Divider, IconButton, Typography } from '@mui/material';
+import { Box, Checkbox, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
 
-export interface CartItemMobileProps {}
+export interface CartItemMobileProps {
+  book: CartType;
+}
 
-export function CartItemMobile(props: CartItemMobileProps) {
+export function CartItemMobile({ book }: CartItemMobileProps) {
   return (
     <Box
       sx={{
@@ -32,7 +35,7 @@ export function CartItemMobile(props: CartItemMobileProps) {
             }}
           >
             <Image
-              src="https://salt.tikicdn.com/cache/w78/ts/product/35/be/8a/22d9d7fb159052f319f0096d64530aa1.png.webp"
+              src={book.images ? book.images[0] : CONFIG.DEFAULT_IMAGE}
               alt="Image"
               fill={true}
             />
@@ -50,7 +53,7 @@ export function CartItemMobile(props: CartItemMobileProps) {
                 WebkitBoxOrient: 'vertical',
               }}
             >
-              Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g
+              {book.title}
             </Typography>
 
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 0.5 }}>
@@ -81,7 +84,7 @@ export function CartItemMobile(props: CartItemMobileProps) {
                 Giao tiết kiệm
               </Typography>
             </Box>
-            <Typography color="primary">350.000 ₫</Typography>
+            <Typography color="primary">{formatPrice(book.quantity * book.price)}</Typography>
             <Box display="flex" alignItems="center" justifyContent="space-between">
               <Box
                 sx={{
@@ -114,7 +117,7 @@ export function CartItemMobile(props: CartItemMobileProps) {
                     flex: '1',
                   }}
                 >
-                  1
+                  {book.quantity}
                 </Box>
                 <Box
                   sx={{

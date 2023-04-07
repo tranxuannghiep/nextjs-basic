@@ -1,12 +1,16 @@
+import { CartType } from '@/store/store-cart';
+import { formatPrice, CONFIG } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Delete from '@mui/icons-material/Delete';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Checkbox, Divider, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
 
-export interface CartItemDesktopProps {}
+export interface CartItemDesktopProps {
+  book: CartType;
+}
 
-export function CartItemDesktop(props: CartItemDesktopProps) {
+export function CartItemDesktop({ book }: CartItemDesktopProps) {
   return (
     <Box
       sx={{
@@ -44,7 +48,7 @@ export function CartItemDesktop(props: CartItemDesktopProps) {
             }}
           >
             <Image
-              src="https://salt.tikicdn.com/cache/w78/ts/product/35/be/8a/22d9d7fb159052f319f0096d64530aa1.png.webp"
+              src={book.images ? book.images[0] : CONFIG.DEFAULT_IMAGE}
               alt="Image"
               fill={true}
             />
@@ -62,7 +66,7 @@ export function CartItemDesktop(props: CartItemDesktopProps) {
                 WebkitBoxOrient: 'vertical',
               }}
             >
-              Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g
+              {book.title}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 0.5 }}>
               <Box
@@ -95,7 +99,7 @@ export function CartItemDesktop(props: CartItemDesktopProps) {
           </Box>
         </Box>
       </Box>
-      <Typography>175.000 ₫</Typography>
+      <Typography>{formatPrice(book.price)}</Typography>
       <Box
         sx={{
           display: 'flex',
@@ -127,7 +131,7 @@ export function CartItemDesktop(props: CartItemDesktopProps) {
             flex: '1',
           }}
         >
-          1
+          {book.quantity}
         </Box>
         <Box
           sx={{
@@ -142,7 +146,7 @@ export function CartItemDesktop(props: CartItemDesktopProps) {
           <Add fontSize="small" />
         </Box>
       </Box>
-      <Typography color="primary">350.000 ₫</Typography>
+      <Typography color="primary">{formatPrice(book.quantity * book.price)}</Typography>
       <IconButton>
         <Delete />
       </IconButton>

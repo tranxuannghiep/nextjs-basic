@@ -1,3 +1,4 @@
+import { cartAction } from '@/actions/cartAction';
 import { productApiServer } from '@/api-server';
 import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
@@ -18,15 +19,30 @@ export interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [viewMore, setViewMore] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const [mainSrc, setMainSrc] = useState<string>(
     product?.images ? product.images[0] : CONFIG.DEFAULT_IMAGE
   );
+
+  const router = useRouter();
+
+  const handleDecreaseQuantity = () => {
+    setQuantity((prev) => (prev <= 1 ? 1 : prev - 1));
+  };
+
+  const handleIncreaseQuantity = () => {
+    setQuantity((prev) => (prev === product.quantity ? prev : prev + 1));
+  };
+
+  const handleClickBuy = () => {
+    cartAction.updateCarts({ ...product, quantity });
+    router.push('/cart');
+  };
 
   useEffect(() => {
     setMainSrc(product?.images ? product.images[0] : CONFIG.DEFAULT_IMAGE);
   }, [product]);
 
-  const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
@@ -201,55 +217,76 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   <Typography component="h6" variant="subtitle1" mb={1}>
                     Số lượng
                   </Typography>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      borderRadius: '4px',
-                      border: '1px solid #f2f2f2',
-                      maxWidth: '100px',
-                      height: '30px',
-                    }}
-                  >
+                  <Box display="flex" alignItems="center">
                     <Box
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        borderRight: '1px solid #f2f2f2',
-                        width: '30px',
+                        borderRadius: '4px',
+                        border: '1px solid #f2f2f2',
+                        maxWidth: '100px',
+                        height: '30px',
+                        marginRight: '20px',
+                        width: '-webkit-fill-available',
                       }}
                     >
-                      <Remove fontSize="small" />
+                      <Box
+                        onClick={handleDecreaseQuantity}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderRight: '1px solid #f2f2f2',
+                          width: '30px',
+                        }}
+                      >
+                        <Remove
+                          fontSize="small"
+                          color={quantity === 1 ? 'disabled' : 'inherit'}
+                          style={{
+                            cursor: quantity === 1 ? 'default' : 'pointer',
+                          }}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flex: '1',
+                        }}
+                      >
+                        {quantity}
+                      </Box>
+                      <Box
+                        onClick={handleIncreaseQuantity}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderLeft: '1px solid #f2f2f2',
+                          width: '30px',
+                        }}
+                      >
+                        <Add
+                          fontSize="small"
+                          color={quantity === product.quantity ? 'disabled' : 'inherit'}
+                          style={{
+                            cursor: quantity === product.quantity ? 'default' : 'pointer',
+                          }}
+                        />
+                      </Box>
                     </Box>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        flex: '1',
-                      }}
-                    >
-                      1
-                    </Box>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        borderLeft: '1px solid #f2f2f2',
-                        width: '30px',
-                      }}
-                    >
-                      <Add fontSize="small" />
-                    </Box>
+                    <Typography>{product.quantity} sản phẩm có sẵn</Typography>
                   </Box>
                 </Box>
                 <Box mt={2} width="200px" height="50px">
-                  <Button variant="contained" fullWidth sx={{ textTransform: 'none' }}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    sx={{ textTransform: 'none' }}
+                    onClick={handleClickBuy}
+                  >
                     Chọn Mua
                   </Button>
                 </Box>
