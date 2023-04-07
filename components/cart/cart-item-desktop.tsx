@@ -1,4 +1,5 @@
-import { CartType } from '@/store/store-cart';
+import { cartAction } from '@/actions/cartAction';
+import useCartStore, { CartType } from '@/store/store-cart';
 import { CONFIG, formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Delete from '@mui/icons-material/Delete';
@@ -14,9 +15,21 @@ export interface CartItemDesktopProps {
 }
 
 export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemDesktopProps) {
+  const { setModalDeleteItem, modalDeleteItem } = useCartStore();
+
   const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked) setSelectedIds((prev) => [...prev, book.id as number]);
     else setSelectedIds((prev) => prev.filter((id) => id !== book.id));
+  };
+
+  const handleDeleteItemCart = () => {
+    setModalDeleteItem({
+      ...modalDeleteItem,
+      open: true,
+      handleConfirm() {
+        cartAction.deleteItemCart(book.id as number);
+      },
+    });
   };
 
   return (
@@ -47,6 +60,7 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
           sx={{
             display: 'flex',
             alignItems: 'center',
+            width: '100%',
           }}
         >
           <Box
@@ -158,7 +172,7 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
         </Box>
       </Box>
       <Typography color="primary">{formatPrice(book.quantity * book.price)}</Typography>
-      <IconButton>
+      <IconButton onClick={handleDeleteItemCart}>
         <Delete />
       </IconButton>
     </Box>

@@ -87,9 +87,6 @@ export function CartLeft(props: CartLeftProps) {
           >
             Thành tiền
           </Typography>
-          <IconButton>
-            <Delete />
-          </IconButton>
         </Box>
       </Paper>
       {cartGroup.map((group) => (

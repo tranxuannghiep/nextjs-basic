@@ -1,4 +1,4 @@
-import { CartLeft, CartRight } from '@/components/cart';
+import { CartAlertConfirm, CartLeft, CartRight } from '@/components/cart';
 import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { Box, Grid, Typography } from '@mui/material';
@@ -46,6 +46,7 @@ export default function CartPage() {
           <CartRight />
         </Grid>
       </Grid>
+      <CartAlertConfirm />
     </Box>
   );
 }

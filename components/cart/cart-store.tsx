@@ -3,8 +3,9 @@ import { formatPriceToK, getTierPricePromotion, PROMOTION } from '@/utils';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import { Box, Button, Checkbox, Paper, Typography } from '@mui/material';
+import { intersectionWith, isEqual } from 'lodash';
 import Link from 'next/link';
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { CartItem } from './cart-item';
 import { ProcessBarPrice } from './process-bar-price';
 
@@ -29,6 +30,15 @@ export function CartStore({ books, storeName }: CartStoreProps) {
     if (checked) setSelectedIds(books.map((book) => book.id as number));
     else setSelectedIds([]);
   };
+
+  useEffect(() => {
+    const newSelectIds = intersectionWith(selectedIds, books, (id, book) => id === book.id);
+    const isChange = isEqual(newSelectIds.sort(), selectedIds.sort());
+
+    if (!isChange) {
+      setSelectedIds(newSelectIds);
+    }
+  }, [books, selectedIds]);
 
   return (
     <Paper elevation={0} sx={{ mb: 1.5 }}>

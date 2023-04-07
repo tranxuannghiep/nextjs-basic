@@ -20,4 +20,15 @@ export const cartAction = {
       localStorage.setItem('carts', JSON.stringify(cartsNew));
     }
   },
+
+  deleteItemCart(id: number) {
+    const { carts } = useCartStore.getState();
+    const idx = carts.findIndex((cart) => cart.id === id);
+
+    if (idx !== NOT_FOUND_INDEX) {
+      const cartsNew = carts.filter((cart) => cart.id !== id);
+      useCartStore.setState({ carts: cartsNew });
+      localStorage.setItem('carts', JSON.stringify(cartsNew));
+    }
+  },
 };

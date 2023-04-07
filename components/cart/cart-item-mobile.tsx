@@ -1,4 +1,5 @@
-import { CartType } from '@/store/store-cart';
+import { cartAction } from '@/actions/cartAction';
+import useCartStore, { CartType } from '@/store/store-cart';
 import { CONFIG, formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
@@ -13,10 +14,23 @@ export interface CartItemMobileProps {
 }
 
 export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMobileProps) {
+  const { setModalDeleteItem, modalDeleteItem } = useCartStore();
+
   const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked) setSelectedIds((prev) => [...prev, book.id as number]);
     else setSelectedIds((prev) => prev.filter((id) => id !== book.id));
   };
+
+  const handleDeleteItemCart = () => {
+    setModalDeleteItem({
+      ...modalDeleteItem,
+      open: true,
+      handleConfirm() {
+        cartAction.deleteItemCart(book.id as number);
+      },
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -142,7 +156,12 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
                   <Add fontSize="small" />
                 </Box>
               </Box>
-              <Typography variant="body2" color="secondary" sx={{ cursor: 'pointer' }}>
+              <Typography
+                variant="body2"
+                color="secondary"
+                sx={{ cursor: 'pointer' }}
+                onClick={handleDeleteItemCart}
+              >
                 Xoá
               </Typography>
             </Box>
