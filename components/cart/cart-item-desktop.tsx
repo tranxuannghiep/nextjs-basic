@@ -1,16 +1,24 @@
 import { CartType } from '@/store/store-cart';
-import { formatPrice, CONFIG } from '@/utils';
+import { CONFIG, formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Delete from '@mui/icons-material/Delete';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Checkbox, Divider, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 export interface CartItemDesktopProps {
   book: CartType;
+  setSelectedIds: Dispatch<SetStateAction<number[]>>;
+  selectedIds: number[];
 }
 
-export function CartItemDesktop({ book }: CartItemDesktopProps) {
+export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemDesktopProps) {
+  const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    if (checked) setSelectedIds((prev) => [...prev, book.id as number]);
+    else setSelectedIds((prev) => prev.filter((id) => id !== book.id));
+  };
+
   return (
     <Box
       sx={{
@@ -31,7 +39,10 @@ export function CartItemDesktop({ book }: CartItemDesktopProps) {
           alignItems: 'center',
         }}
       >
-        <Checkbox />
+        <Checkbox
+          checked={selectedIds.includes(book.id as number)}
+          onChange={handleChangeCheckbox}
+        />
         <Box
           sx={{
             display: 'flex',

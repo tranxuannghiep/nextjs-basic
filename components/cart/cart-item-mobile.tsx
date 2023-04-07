@@ -4,12 +4,19 @@ import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Checkbox, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 export interface CartItemMobileProps {
   book: CartType;
+  setSelectedIds: Dispatch<SetStateAction<number[]>>;
+  selectedIds: number[];
 }
 
-export function CartItemMobile({ book }: CartItemMobileProps) {
+export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMobileProps) {
+  const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    if (checked) setSelectedIds((prev) => [...prev, book.id as number]);
+    else setSelectedIds((prev) => prev.filter((id) => id !== book.id));
+  };
   return (
     <Box
       sx={{
@@ -23,7 +30,10 @@ export function CartItemMobile({ book }: CartItemMobileProps) {
       }}
     >
       <Box display="flex" alignItems="center">
-        <Checkbox />
+        <Checkbox
+          checked={selectedIds.includes(book.id as number)}
+          onChange={handleChangeCheckbox}
+        />
         <Box display="flex" alignItems="center" flex={1}>
           <Box
             sx={{

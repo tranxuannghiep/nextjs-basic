@@ -1,10 +1,15 @@
 import { Box, LinearProgress, linearProgressClasses, Typography } from '@mui/material';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { formatPriceToK, PROMOTION } from '@/utils';
 
-export interface ProcessBarPriceProps {}
+export interface ProcessBarPriceProps {
+  discountPrice: number;
+  currentPrice: number;
+  tier: number;
+}
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 6,
@@ -39,8 +44,13 @@ const TopTextProgress = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export function ProcessBarPrice(props: ProcessBarPriceProps) {
-  const [percent, setPercent] = useState(70);
+export function ProcessBarPrice({ discountPrice, currentPrice, tier }: ProcessBarPriceProps) {
+  const [percent, setPercent] = useState(0);
+
+  useEffect(() => {
+    if (currentPrice > PROMOTION.TIER_SECOND_PRICE.BUY_PRICE) setPercent(100);
+    else setPercent((currentPrice / PROMOTION.TIER_SECOND_PRICE.BUY_PRICE) * 100);
+  }, [currentPrice]);
 
   return (
     <Box
@@ -75,13 +85,14 @@ export function ProcessBarPrice(props: ProcessBarPriceProps) {
           <Box position="relative" height="16px">
             <BottomTextProgress>Mua</BottomTextProgress>
           </Box>
-          <Box className="circle-price active" position="relative">
-            <TopTextProgress className="active">-10k</TopTextProgress>
-            <CheckOutlinedIcon sx={{ fontSize: '12px', color: '#089148' }} />
+          <Box className={`circle-price ${tier === 1 && 'active'}`} position="relative">
+            <TopTextProgress className={`${tier === 1 && 'active'}`}>-10k</TopTextProgress>
+            {tier === 1 && <CheckOutlinedIcon sx={{ fontSize: '12px', color: '#089148' }} />}
             <BottomTextProgress>149K</BottomTextProgress>
           </Box>
-          <Box className="circle-price" position="relative">
-            <TopTextProgress>-20k</TopTextProgress>
+          <Box className={`circle-price ${tier === 2 && 'active'}`} position="relative">
+            <TopTextProgress className={`${tier === 2 && 'active'}`}>-20k</TopTextProgress>
+            {tier === 2 && <CheckOutlinedIcon sx={{ fontSize: '12px', color: '#089148' }} />}
             <BottomTextProgress>299K</BottomTextProgress>
           </Box>
         </Box>
@@ -109,9 +120,11 @@ export function ProcessBarPrice(props: ProcessBarPriceProps) {
             fill={true}
           />
         </Box>
-        <Typography variant="caption" ml={1} fontWeight="500" color="#089148">
-          Yay! Bạn đã được Freeship 10K
-        </Typography>
+        {discountPrice > 0 && (
+          <Typography variant="caption" ml={1} fontWeight="500" color="#089148">
+            Yay! Bạn đã được Freeship {formatPriceToK(discountPrice)}
+          </Typography>
+        )}
       </Box>
     </Box>
   );
