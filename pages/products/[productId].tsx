@@ -19,23 +19,23 @@ export interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [viewMore, setViewMore] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const [amount, setAmount] = useState(1);
   const [mainSrc, setMainSrc] = useState<string>(
     product?.images ? product.images[0] : CONFIG.DEFAULT_IMAGE
   );
 
   const router = useRouter();
 
-  const handleDecreaseQuantity = () => {
-    setQuantity((prev) => (prev <= 1 ? 1 : prev - 1));
+  const handleDecreaseAmount = () => {
+    setAmount((prev) => (prev <= 1 ? 1 : prev - 1));
   };
 
-  const handleIncreaseQuantity = () => {
-    setQuantity((prev) => (prev === product.quantity ? prev : prev + 1));
+  const handleIncreaseAmount = () => {
+    setAmount((prev) => (prev === product.quantity ? prev : prev + 1));
   };
 
   const handleClickBuy = () => {
-    cartAction.updateCarts({ ...product, quantity });
+    cartAction.updateCarts({ ...product, amount });
     router.push('/cart');
   };
 
@@ -231,7 +231,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       }}
                     >
                       <Box
-                        onClick={handleDecreaseQuantity}
+                        onClick={handleDecreaseAmount}
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
@@ -242,9 +242,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       >
                         <Remove
                           fontSize="small"
-                          color={quantity === 1 ? 'disabled' : 'inherit'}
+                          color={amount === 1 ? 'disabled' : 'inherit'}
                           style={{
-                            cursor: quantity === 1 ? 'default' : 'pointer',
+                            cursor: amount === 1 ? 'default' : 'pointer',
                           }}
                         />
                       </Box>
@@ -256,10 +256,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                           flex: '1',
                         }}
                       >
-                        {quantity}
+                        {amount}
                       </Box>
                       <Box
-                        onClick={handleIncreaseQuantity}
+                        onClick={handleIncreaseAmount}
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
@@ -270,9 +270,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       >
                         <Add
                           fontSize="small"
-                          color={quantity === product.quantity ? 'disabled' : 'inherit'}
+                          color={amount === product.quantity ? 'disabled' : 'inherit'}
                           style={{
-                            cursor: quantity === product.quantity ? 'default' : 'pointer',
+                            cursor: amount === product.quantity ? 'default' : 'pointer',
                           }}
                         />
                       </Box>

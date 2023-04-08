@@ -1,4 +1,5 @@
 import useCartStore, { CartType } from '@/store/store-cart';
+import { values, flatMap } from 'lodash';
 import { NOT_FOUND_INDEX } from '@/utils';
 
 export const cartAction = {
@@ -12,7 +13,7 @@ export const cartAction = {
     } else {
       const cartsNew = [
         ...carts.slice(0, idx),
-        { ...item, quantity: item.quantity + carts[idx].quantity },
+        { ...item, amount: item.amount + carts[idx].amount },
         ...carts.slice(idx + 1),
       ];
 
@@ -31,4 +32,21 @@ export const cartAction = {
       localStorage.setItem('carts', JSON.stringify(cartsNew));
     }
   },
+};
+
+export const getTotalPrice = () => {
+  const { carts, cartSelectedIds } = useCartStore.getState();
+  const selectedIds = flatMap(values(cartSelectedIds));
+  return carts.reduce((acc, cart) => {
+    if (selectedIds.includes(cart.id as number)) {
+      return acc + cart.price * cart.amount;
+    }
+    return acc;
+  }, 0);
+};
+
+export const getNumberProduct = () => {
+  const { cartSelectedIds } = useCartStore.getState();
+  const selectedIds = flatMap(values(cartSelectedIds));
+  return selectedIds.length;
 };

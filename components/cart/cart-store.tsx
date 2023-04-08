@@ -1,4 +1,4 @@
-import { CartType } from '@/store/store-cart';
+import useCartStore, { CartType } from '@/store/store-cart';
 import { formatPriceToK, getTierPricePromotion, PROMOTION } from '@/utils';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
@@ -15,12 +15,13 @@ export interface CartStoreProps {
 }
 
 export function CartStore({ books, storeName }: CartStoreProps) {
+  const { cartSelectedIds, setCartSelectedIds } = useCartStore();
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const { currentPrice, discountPrice, priceBuyNextLevel, discountPriceNextLevel, tier } =
     useMemo(() => {
       const totalPrice = books.reduce((acc, book) => {
-        if (selectedIds.includes(book.id as number)) return acc + book.price * book.quantity;
+        if (selectedIds.includes(book.id as number)) return acc + book.price * book.amount;
         else return acc;
       }, 0);
       return getTierPricePromotion(totalPrice);
@@ -33,12 +34,22 @@ export function CartStore({ books, storeName }: CartStoreProps) {
 
   useEffect(() => {
     const newSelectIds = intersectionWith(selectedIds, books, (id, book) => id === book.id);
-    const isChange = isEqual(newSelectIds.sort(), selectedIds.sort());
+    const isChange = !isEqual(newSelectIds.sort(), selectedIds.sort());
 
-    if (!isChange) {
+    if (isChange) {
       setSelectedIds(newSelectIds);
     }
   }, [books, selectedIds]);
+
+  useEffect(() => {
+    const isChange = !isEqual(selectedIds.sort(), cartSelectedIds[storeName]?.sort());
+    if (isChange) {
+      setCartSelectedIds({
+        ...cartSelectedIds,
+        [storeName]: selectedIds,
+      });
+    }
+  }, [selectedIds, setCartSelectedIds, storeName, cartSelectedIds]);
 
   return (
     <Paper elevation={0} sx={{ mb: 1.5 }}>

@@ -2,7 +2,11 @@ import { ProductType } from '@/models';
 import { create } from 'zustand';
 
 export interface CartType extends ProductType {
-  quantity: number;
+  amount: number;
+}
+
+interface CartSelectedType {
+  [key: string]: number[];
 }
 
 interface DeleteModalType {
@@ -17,6 +21,9 @@ interface CartStoreType {
 
   modalDeleteItem: DeleteModalType;
   setModalDeleteItem: (modalDeleteItem: DeleteModalType) => void;
+
+  cartSelectedIds: CartSelectedType;
+  setCartSelectedIds: (cartSelectedIds: CartSelectedType) => void;
 }
 
 const useCartStore = create<CartStoreType>((set) => ({
@@ -29,6 +36,9 @@ const useCartStore = create<CartStoreType>((set) => ({
     handleCancel() {},
   },
   setModalDeleteItem: (modalDeleteItem: DeleteModalType) => set({ modalDeleteItem }),
+
+  cartSelectedIds: {},
+  setCartSelectedIds: (cartSelectedIds: CartSelectedType) => set({ cartSelectedIds }),
 }));
 
 export default useCartStore;

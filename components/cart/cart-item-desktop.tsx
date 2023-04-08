@@ -6,7 +6,7 @@ import Delete from '@mui/icons-material/Delete';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Checkbox, Divider, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export interface CartItemDesktopProps {
   book: CartType;
@@ -145,7 +145,13 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
             width: '30px',
           }}
         >
-          <Remove fontSize="small" />
+          <Remove
+            fontSize="small"
+            color={book.amount === 1 ? 'disabled' : 'inherit'}
+            style={{
+              cursor: book.amount === 1 ? 'default' : 'pointer',
+            }}
+          />
         </Box>
         <Box
           sx={{
@@ -156,7 +162,7 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
             flex: '1',
           }}
         >
-          {book.quantity}
+          {book.amount}
         </Box>
         <Box
           sx={{
@@ -168,10 +174,16 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
             width: '30px',
           }}
         >
-          <Add fontSize="small" />
+          <Add
+            fontSize="small"
+            color={book.amount === book.quantity ? 'disabled' : 'inherit'}
+            style={{
+              cursor: book.amount === book.quantity ? 'default' : 'pointer',
+            }}
+          />
         </Box>
       </Box>
-      <Typography color="primary">{formatPrice(book.quantity * book.price)}</Typography>
+      <Typography color="primary">{formatPrice(book.amount * book.price)}</Typography>
       <IconButton onClick={handleDeleteItemCart}>
         <Delete />
       </IconButton>
