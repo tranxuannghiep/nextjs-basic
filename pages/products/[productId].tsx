@@ -4,7 +4,8 @@ import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductListImage } from '@/components/products';
 import { ProductType } from '@/models';
-import { CONFIG, formatPrice } from '@/utils';
+import useCartStore from '@/store/store-cart';
+import { CONFIG, NOT_FOUND_INDEX, formatPrice } from '@/utils';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Button, Divider, Grid, Paper, Typography } from '@mui/material';
@@ -18,6 +19,7 @@ export interface ProductDetailProps {
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const { carts } = useCartStore();
   const [viewMore, setViewMore] = useState(false);
   const [amount, setAmount] = useState(1);
   const [mainSrc, setMainSrc] = useState<string>(
@@ -42,6 +44,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   useEffect(() => {
     setMainSrc(product?.images ? product.images[0] : CONFIG.DEFAULT_IMAGE);
   }, [product]);
+
+  useEffect(() => {
+    const idx = carts.findIndex((cart) => cart.id === product.id);
+    if (idx === NOT_FOUND_INDEX) setAmount(1);
+    else setAmount(carts[idx].amount);
+  }, [carts, product]);
 
   if (router.isFallback) {
     return <div>Loading...</div>;

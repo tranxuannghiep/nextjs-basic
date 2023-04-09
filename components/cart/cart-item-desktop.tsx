@@ -6,6 +6,7 @@ import Delete from '@mui/icons-material/Delete';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Checkbox, Divider, IconButton, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export interface CartItemDesktopProps {
@@ -20,6 +21,16 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
   const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked) setSelectedIds((prev) => [...prev, book.id as number]);
     else setSelectedIds((prev) => prev.filter((id) => id !== book.id));
+  };
+
+  const handleDecreaseAmount = () => {
+    if (book.amount === 1) return;
+    cartAction.updateCarts({ ...book, amount: book.amount - 1 });
+  };
+
+  const handleIncreaseAmount = () => {
+    if (book.amount === book.quantity) return;
+    cartAction.updateCarts({ ...book, amount: book.amount + 1 });
   };
 
   const handleDeleteItemCart = () => {
@@ -63,21 +74,23 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
             width: '100%',
           }}
         >
-          <Box
-            sx={{
-              width: '80px',
-              height: '80px',
-              position: 'relative',
-              objectFit: 'contain',
-              cursor: 'pointer',
-            }}
-          >
-            <Image
-              src={book.images ? book.images[0] : CONFIG.DEFAULT_IMAGE}
-              alt="Image"
-              fill={true}
-            />
-          </Box>
+          <Link href={`/products/${book.id}`} passHref prefetch={false}>
+            <Box
+              sx={{
+                width: '80px',
+                height: '80px',
+                position: 'relative',
+                objectFit: 'contain',
+                cursor: 'pointer',
+              }}
+            >
+              <Image
+                src={book.images ? book.images[0] : CONFIG.DEFAULT_IMAGE}
+                alt="Image"
+                fill={true}
+              />
+            </Box>
+          </Link>
           <Box pl={2} pr={1} width="calc(100% - 100px)">
             <Typography
               variant="body2"
@@ -136,6 +149,7 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
         }}
       >
         <Box
+          onClick={handleDecreaseAmount}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -165,6 +179,7 @@ export function CartItemDesktop({ book, setSelectedIds, selectedIds }: CartItemD
           {book.amount}
         </Box>
         <Box
+          onClick={handleIncreaseAmount}
           sx={{
             display: 'flex',
             alignItems: 'center',

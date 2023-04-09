@@ -13,7 +13,9 @@ export const cartAction = {
     } else {
       const cartsNew = [
         ...carts.slice(0, idx),
-        { ...item, amount: item.amount + carts[idx].amount },
+        {
+          ...item,
+        },
         ...carts.slice(idx + 1),
       ];
 

@@ -5,6 +5,7 @@ import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 import { Box, Checkbox, Divider, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 export interface CartItemMobileProps {
@@ -31,6 +32,16 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
     });
   };
 
+  const handleDecreaseAmount = () => {
+    if (book.amount === 1) return;
+    cartAction.updateCarts({ ...book, amount: book.amount - 1 });
+  };
+
+  const handleIncreaseAmount = () => {
+    if (book.amount === book.quantity) return;
+    cartAction.updateCarts({ ...book, amount: book.amount + 1 });
+  };
+
   return (
     <Box
       sx={{
@@ -49,21 +60,23 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
           onChange={handleChangeCheckbox}
         />
         <Box display="flex" alignItems="center" flex={1}>
-          <Box
-            sx={{
-              width: '80px',
-              height: '80px',
-              position: 'relative',
-              objectFit: 'contain',
-              cursor: 'pointer',
-            }}
-          >
-            <Image
-              src={book.images ? book.images[0] : CONFIG.DEFAULT_IMAGE}
-              alt="Image"
-              fill={true}
-            />
-          </Box>
+          <Link href={`/products/${book.id}`} passHref prefetch={false}>
+            <Box
+              sx={{
+                width: '80px',
+                height: '80px',
+                position: 'relative',
+                objectFit: 'contain',
+                cursor: 'pointer',
+              }}
+            >
+              <Image
+                src={book.images ? book.images[0] : CONFIG.DEFAULT_IMAGE}
+                alt="Image"
+                fill={true}
+              />
+            </Box>
+          </Link>
           <Box pl={2} pr={1} flex={1}>
             <Typography
               variant="caption"
@@ -121,6 +134,7 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
                 }}
               >
                 <Box
+                  onClick={handleDecreaseAmount}
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
@@ -130,7 +144,13 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
                     width: '25px',
                   }}
                 >
-                  <Remove fontSize="small" />
+                  <Remove
+                    fontSize="small"
+                    color={book.amount === 1 ? 'disabled' : 'inherit'}
+                    style={{
+                      cursor: book.amount === 1 ? 'default' : 'pointer',
+                    }}
+                  />
                 </Box>
                 <Box
                   sx={{
@@ -141,9 +161,10 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
                     flex: '1',
                   }}
                 >
-                  {book.quantity}
+                  {book.amount}
                 </Box>
                 <Box
+                  onClick={handleIncreaseAmount}
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
@@ -153,7 +174,13 @@ export function CartItemMobile({ book, setSelectedIds, selectedIds }: CartItemMo
                     width: '25px',
                   }}
                 >
-                  <Add fontSize="small" />
+                  <Add
+                    fontSize="small"
+                    color={book.amount === book.quantity ? 'disabled' : 'inherit'}
+                    style={{
+                      cursor: book.amount === book.quantity ? 'default' : 'pointer',
+                    }}
+                  />
                 </Box>
               </Box>
               <Typography
