@@ -5,6 +5,8 @@ import { PaymentItem } from './payment-item';
 import { CartType } from '@/store/store-cart';
 import { formatPrice, getTierPricePromotion, PROMOTION } from '@/utils';
 import { useMemo } from 'react';
+import { addDays, format } from 'date-fns';
+import viLocale from 'date-fns/locale/vi';
 
 export interface PaymentStoreProps {
   nameStore: string;
@@ -153,7 +155,8 @@ export function PaymentStore({ nameStore, carts, index }: PaymentStoreProps) {
           />
         </Box>
         <Typography variant="body2" color="#079449">
-          Gói {index + 1}: Giao vào Thứ Bảy, 28/01
+          Gói {index + 1}: Giao vào{' '}
+          {format(addDays(new Date(), 3), 'EEEE, dd/MM', { locale: viLocale })}
         </Typography>
       </Box>
     </Box>
