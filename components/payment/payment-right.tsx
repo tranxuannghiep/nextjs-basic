@@ -1,9 +1,27 @@
+import { getCartsSelected, getTotalPrice } from '@/actions/cartAction';
+import { formatPrice, getTierPricePromotion } from '@/utils';
 import { Box, Button, Divider, Paper, Stack, Typography } from '@mui/material';
+import { useMemo } from 'react';
 import { Address } from '../common';
 
 export interface PaymentRightProps {}
 
 export function PaymentRight(props: PaymentRightProps) {
+  const cartSelected = useMemo(() => {
+    return getCartsSelected();
+  }, []);
+  const totalPrice = getTotalPrice();
+  const shipPrice = 20000 * Object.keys(cartSelected).length;
+
+  const promotionShip = useMemo(() => {
+    let promotionPrice = 0;
+    Object.entries(cartSelected).forEach(([key, carts]) => {
+      const currentPrice = carts.reduce((acc, val) => acc + val.amount * val.price, 0);
+      promotionPrice += getTierPricePromotion(currentPrice).discountPrice;
+    });
+    return promotionPrice;
+  }, [cartSelected]);
+
   return (
     <Box>
       <Address />
@@ -14,7 +32,7 @@ export function PaymentRight(props: PaymentRightProps) {
               Tạm tính
             </Typography>
             <Typography variant="caption" color="GrayText">
-              1.396.300đ
+              {formatPrice(totalPrice)}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -22,7 +40,7 @@ export function PaymentRight(props: PaymentRightProps) {
               Phí vận chuyển
             </Typography>
             <Typography variant="caption" color="GrayText">
-              32.000đ
+              {formatPrice(shipPrice)}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -30,7 +48,7 @@ export function PaymentRight(props: PaymentRightProps) {
               Khuyến mãi vận chuyển
             </Typography>
             <Typography variant="caption" color="#00ab56">
-              -24.000đ
+              -{formatPrice(promotionShip)}
             </Typography>
           </Box>
           <Divider sx={{ my: 1 }} />
@@ -40,7 +58,7 @@ export function PaymentRight(props: PaymentRightProps) {
             </Typography>
             <Stack alignItems="flex-end">
               <Typography variant="body1" color="#fe3834" fontWeight="500">
-                1.404.300đ
+                {formatPrice(totalPrice + shipPrice - promotionShip)}
               </Typography>
               <Typography variant="caption" color="GrayText">
                 (Đã bao gồm VAT nếu có)

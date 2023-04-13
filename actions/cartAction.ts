@@ -1,4 +1,4 @@
-import useCartStore, { CartType } from '@/store/store-cart';
+import useCartStore, { CartSelectedType, CartType } from '@/store/store-cart';
 import { values, flatMap } from 'lodash';
 import { NOT_FOUND_INDEX } from '@/utils';
 
@@ -51,4 +51,19 @@ export const getNumberProduct = () => {
   const { cartSelectedIds } = useCartStore.getState();
   const selectedIds = flatMap(values(cartSelectedIds));
   return selectedIds.length;
+};
+
+export const getCartsSelected = () => {
+  const { carts, cartSelectedIds } = useCartStore.getState();
+  const cartsSelected: CartSelectedType = {};
+
+  Object.entries(cartSelectedIds).forEach(([key, numbers]) => {
+    numbers.forEach((id) => {
+      const cart = carts.find((cart) => cart.id === id);
+      if (cart) {
+        cartsSelected[key] = [...(cartsSelected[key] || []), { ...cart }];
+      }
+    });
+  });
+  return cartsSelected;
 };

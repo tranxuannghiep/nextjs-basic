@@ -2,10 +2,23 @@ import { Box, Grid, Typography } from '@mui/material';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import Image from 'next/image';
 import { PaymentItem } from './payment-item';
+import { CartType } from '@/store/store-cart';
+import { formatPrice, getTierPricePromotion, PROMOTION } from '@/utils';
+import { useMemo } from 'react';
 
-export interface PaymentStoreProps {}
+export interface PaymentStoreProps {
+  nameStore: string;
+  carts: CartType[];
+  index: number;
+}
 
-export function PaymentStore(props: PaymentStoreProps) {
+export function PaymentStore({ nameStore, carts, index }: PaymentStoreProps) {
+  const totalPrice = useMemo(() => {
+    return carts.reduce((acc, val) => acc + val.price * val.amount, 0);
+  }, [carts]);
+
+  const { discountPrice } = getTierPricePromotion(totalPrice);
+
   return (
     <Box
       sx={{
@@ -51,16 +64,31 @@ export function PaymentStore(props: PaymentStoreProps) {
               </Typography>
             </Box>
             <Box display="flex" alignItems="center">
-              <Typography variant="body2" color="GrayText" sx={{ textDecoration: 'line-through' }}>
-                14.000 ₫
-              </Typography>
-              <Typography variant="body2" color="#00ab56" fontWeight="500" ml={1}>
-                MIỄN PHÍ
-              </Typography>
+              {discountPrice === 0 ? (
+                <Typography variant="body2" color="GrayText">
+                  {formatPrice(PROMOTION.TIER_SECOND_PRICE.DISCOUNT_PRICE)}
+                </Typography>
+              ) : (
+                <>
+                  <Typography
+                    variant="body2"
+                    color="GrayText"
+                    sx={{ textDecoration: 'line-through' }}
+                  >
+                    {formatPrice(PROMOTION.TIER_SECOND_PRICE.DISCOUNT_PRICE)}
+                  </Typography>
+                  <Typography variant="body2" color="#00ab56" fontWeight="500" ml={1}>
+                    {discountPrice === PROMOTION.TIER_SECOND_PRICE.DISCOUNT_PRICE
+                      ? 'MIỄN PHÍ'
+                      : formatPrice(discountPrice)}
+                  </Typography>
+                </>
+              )}
             </Box>
           </Box>
-          <PaymentItem />
-          <PaymentItem />
+          {carts.map((cart) => (
+            <PaymentItem key={cart.id} cart={cart} />
+          ))}
           <Box
             sx={{
               display: {
@@ -125,7 +153,7 @@ export function PaymentStore(props: PaymentStoreProps) {
           />
         </Box>
         <Typography variant="body2" color="#079449">
-          Gói 1: Giao vào Thứ Bảy, 28/01
+          Gói {index + 1}: Giao vào Thứ Bảy, 28/01
         </Typography>
       </Box>
     </Box>

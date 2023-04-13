@@ -5,8 +5,12 @@ export interface CartType extends ProductType {
   amount: number;
 }
 
-interface CartSelectedType {
+interface CartSelectedIdsType {
   [key: string]: number[];
+}
+
+export interface CartSelectedType {
+  [key: string]: CartType[];
 }
 
 interface DeleteModalType {
@@ -22,8 +26,8 @@ interface CartStoreType {
   modalDeleteItem: DeleteModalType;
   setModalDeleteItem: (modalDeleteItem: DeleteModalType) => void;
 
-  cartSelectedIds: CartSelectedType;
-  setCartSelectedIds: (cartSelectedIds: CartSelectedType) => void;
+  cartSelectedIds: CartSelectedIdsType;
+  setCartSelectedIds: (cartSelectedIds: CartSelectedIdsType) => void;
 }
 
 const useCartStore = create<CartStoreType>((set) => ({
@@ -38,7 +42,7 @@ const useCartStore = create<CartStoreType>((set) => ({
   setModalDeleteItem: (modalDeleteItem: DeleteModalType) => set({ modalDeleteItem }),
 
   cartSelectedIds: {},
-  setCartSelectedIds: (cartSelectedIds: CartSelectedType) => set({ cartSelectedIds }),
+  setCartSelectedIds: (cartSelectedIds: CartSelectedIdsType) => set({ cartSelectedIds }),
 }));
 
 export default useCartStore;

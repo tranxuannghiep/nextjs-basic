@@ -1,10 +1,14 @@
+import { getCartsSelected } from '@/actions/cartAction';
 import { Box, Paper, Radio, Typography } from '@mui/material';
 import Image from 'next/image';
+import { useMemo } from 'react';
 import { PaymentStore } from './payment-store';
 
-export interface DeliveryFormProps {}
+export function DeliveryForm() {
+  const cartSelected = useMemo(() => {
+    return getCartsSelected();
+  }, []);
 
-export function DeliveryForm(props: DeliveryFormProps) {
   return (
     <Paper elevation={0} sx={{ px: 2, pt: 2, pb: 4 }}>
       <Typography variant="h6">Chọn hình thức giao hàng</Typography>
@@ -51,7 +55,7 @@ export function DeliveryForm(props: DeliveryFormProps) {
             </Typography>
             <Paper elevation={0} sx={{ display: 'flex', alignItems: 'center', px: 0.5 }}>
               <Typography variant="caption" fontWeight="500" color="#00ab56" mr={0.5}>
-                -24K
+                -20K
               </Typography>
               <Box
                 sx={{
@@ -70,14 +74,14 @@ export function DeliveryForm(props: DeliveryFormProps) {
               >
                 <Image
                   src="https://salt.tikicdn.com/ts/upload/b7/77/7d/0a981c8d05f5bec66dc057f6575d2e2f.png"
-                  alt="-24k"
+                  alt="-20k"
                   fill={true}
                 />
               </Box>
             </Paper>
           </Box>
           <Typography variant="caption" color="GrayText" ml={3}>
-            Có 3 sản phẩm hỗ trợ hình thức này
+            Có {Object.keys(cartSelected).length} sản phẩm hỗ trợ hình thức này
           </Typography>
           <Box
             sx={{
@@ -98,8 +102,10 @@ export function DeliveryForm(props: DeliveryFormProps) {
           </Box>
         </Box>
       </Box>
-      <PaymentStore />
-      <PaymentStore />
+
+      {Object.entries(cartSelected).map(([nameStore, carts], index) => (
+        <PaymentStore key={nameStore} nameStore={nameStore} carts={carts} index={index} />
+      ))}
     </Paper>
   );
 }

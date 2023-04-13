@@ -1,9 +1,13 @@
+import { CartType } from '@/store/store-cart';
+import { CONFIG, formatPrice } from '@/utils';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
-export interface PaymentItemProps {}
+export interface PaymentItemProps {
+  cart: CartType;
+}
 
-export function PaymentItem(props: PaymentItemProps) {
+export function PaymentItem({ cart }: PaymentItemProps) {
   return (
     <Box py={1.5} display="flex" justifyContent="space-between" alignItems="center">
       <Box>
@@ -14,11 +18,7 @@ export function PaymentItem(props: PaymentItemProps) {
             height: '48px',
           }}
         >
-          <Image
-            src="https://salt.tikicdn.com/cache/96x96/ts/product/35/be/8a/22d9d7fb159052f319f0096d64530aa1.png"
-            alt="item"
-            fill={true}
-          />
+          <Image src={cart.images?.[0] || CONFIG.DEFAULT_IMAGE} alt="item" fill={true} />
         </Box>
       </Box>
       <Box ml={2} flex="1">
@@ -35,14 +35,14 @@ export function PaymentItem(props: PaymentItemProps) {
             WebkitBoxOrient: 'vertical',
           }}
         >
-          Trà thanh lọc cơ thể Detox D2021 SACHS TEA giúp đẹp da 16 túi lọc/40g
+          {cart.title}
         </Typography>
         <Box display="flex" justifyContent="space-between" mt={0.5}>
           <Typography variant="body2" color="GrayText">
-            SL: x3
+            SL: x{cart.amount}
           </Typography>
           <Typography variant="body2" fontWeight="500">
-            175.000 ₫
+            {formatPrice(cart.amount * cart.price)}
           </Typography>
         </Box>
       </Box>

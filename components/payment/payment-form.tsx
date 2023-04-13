@@ -1,17 +1,24 @@
 import { imageCartStripe } from '@/utils';
 import { Box, Paper, Radio, RadioGroup, Typography } from '@mui/material';
 import Image from 'next/image';
+import { useState } from 'react';
 
-export interface PaymentFormProps {}
-
-export function PaymentForm(props: PaymentFormProps) {
+export function PaymentForm() {
+  const [paymentValue, setPaymentValue] = useState('0');
   return (
     <Paper elevation={0} sx={{ p: 2, mt: 2 }}>
       <Typography variant="h6">Chọn hình thức thanh toán</Typography>
       <Box my={2}>
         <RadioGroup>
           <Box display="flex" alignItems="center">
-            <Radio color="info" sx={{ mr: 0.5 }} size="small" value={0} />
+            <Radio
+              color="info"
+              sx={{ mr: 0.5 }}
+              size="small"
+              value={'0'}
+              checked={paymentValue === '0'}
+              onChange={(e) => setPaymentValue(e.target.value)}
+            />
             <Box
               sx={{
                 position: 'relative',
@@ -31,7 +38,14 @@ export function PaymentForm(props: PaymentFormProps) {
           </Box>
 
           <Box display="flex" alignItems="center">
-            <Radio color="info" sx={{ mr: 0.5 }} size="small" value={1} />
+            <Radio
+              color="info"
+              sx={{ mr: 0.5 }}
+              size="small"
+              value={'1'}
+              checked={paymentValue === '1'}
+              onChange={(e) => setPaymentValue(e.target.value)}
+            />
             <Box
               sx={{
                 position: 'relative',
