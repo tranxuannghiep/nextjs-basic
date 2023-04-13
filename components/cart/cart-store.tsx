@@ -5,7 +5,7 @@ import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import { Box, Button, Checkbox, Paper, Typography } from '@mui/material';
 import { intersectionWith, isEqual } from 'lodash';
 import Link from 'next/link';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { CartItem } from './cart-item';
 import { ProcessBarPrice } from './process-bar-price';
 
@@ -48,8 +48,22 @@ export function CartStore({ books, storeName }: CartStoreProps) {
         ...cartSelectedIds,
         [storeName]: selectedIds,
       });
+      localStorage.setItem(
+        'cartSelectedIds',
+        JSON.stringify({
+          ...cartSelectedIds,
+          [storeName]: selectedIds,
+        })
+      );
     }
   }, [selectedIds, setCartSelectedIds, storeName, cartSelectedIds]);
+
+  useEffect(() => {
+    if (cartSelectedIds[storeName]) {
+      setSelectedIds([...cartSelectedIds[storeName]]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Paper elevation={0} sx={{ mb: 1.5 }}>

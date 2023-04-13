@@ -1,13 +1,10 @@
 import { getCartsSelected } from '@/actions/cartAction';
 import { Box, Paper, Radio, Typography } from '@mui/material';
 import Image from 'next/image';
-import { useMemo } from 'react';
 import { PaymentStore } from './payment-store';
 
 export function DeliveryForm() {
-  const cartSelected = useMemo(() => {
-    return getCartsSelected();
-  }, []);
+  const cartSelected = getCartsSelected();
 
   return (
     <Paper elevation={0} sx={{ px: 2, pt: 2, pb: 4 }}>

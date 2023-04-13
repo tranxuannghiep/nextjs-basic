@@ -20,7 +20,7 @@ export default function App({
   pageProps,
 }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayout;
-  const { setCarts } = useCartStore();
+  const { setCarts, setCartSelectedIds } = useCartStore();
   useEffect(() => {
     const fixViewport = () => {
       const ww = window.innerWidth || document.body.clientWidth;
@@ -46,7 +46,10 @@ export default function App({
   useEffect(() => {
     const cartsFromLocalStorage = localStorage.getItem('carts');
     setCarts(cartsFromLocalStorage ? JSON.parse(cartsFromLocalStorage) : []);
-  }, [setCarts]);
+
+    const cartSelectedIds = localStorage.getItem('cartSelectedIds');
+    setCartSelectedIds(cartSelectedIds ? JSON.parse(cartSelectedIds) : {});
+  }, [setCarts, setCartSelectedIds]);
 
   return (
     <CacheProvider value={emotionCache}>

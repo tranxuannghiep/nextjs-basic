@@ -7,9 +7,8 @@ import { Address } from '../common';
 export interface PaymentRightProps {}
 
 export function PaymentRight(props: PaymentRightProps) {
-  const cartSelected = useMemo(() => {
-    return getCartsSelected();
-  }, []);
+  const cartSelected = getCartsSelected();
+
   const totalPrice = getTotalPrice();
   const shipPrice = 20000 * Object.keys(cartSelected).length;
 
