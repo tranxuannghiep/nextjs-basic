@@ -2,13 +2,15 @@ import { Seo } from '@/components/common/seo';
 import { MainLayout } from '@/components/layout';
 import { ProductFilters, ProductList } from '@/components/products';
 import { ProductSort } from '@/components/products/product-sort';
+import { Progress } from '@/components/progress/Progress';
 import { useProducts } from '@/hooks';
 import { Box, Grid, Pagination, Paper } from '@mui/material';
 
 export default function ProductsPage() {
-  const { dataProduct } = useProducts();
+  const { dataProduct, isLoading } = useProducts();
   return (
     <Box>
+      <Progress isAnimating={isLoading} />
       <Seo
         data={{
           title: 'Products',
